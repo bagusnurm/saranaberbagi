@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sarana Berbagi - Informasi Donatur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#266d68",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#9cf2e8",
+                        "inverse-primary": "#80d5cb",
+                        "primary": "#005c55",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#80d5cb",
+                        "surface-container": "#eaedff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#dae2fd",
+                        "on-background": "#131b2e",
+                        "on-primary-fixed": "#00201d",
+                        "on-primary-container": "#a3faef",
+                        "on-surface": "#131b2e",
+                        "surface-dim": "#d2d9f4",
+                        "on-primary-fixed-variant": "#00504a",
+                        "inverse-surface": "#283044",
+                        "surface-container-low": "#f2f3ff",
+                        "surface": "#faf8ff",
+                        "tertiary-fixed": "#ffddb8",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "secondary-fixed-dim": "#8fd3cc",
+                        "tertiary-container": "#945d00",
+                        "on-secondary-fixed": "#00201e",
+                        "on-surface-variant": "#3e4947",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-bright": "#faf8ff",
+                        "primary-container": "#0f766e",
+                        "background": "#faf8ff",
+                        "secondary-container": "#a8ece5",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-tertiary-container": "#ffe6cc",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "secondary": "#216963",
+                        "surface-tint": "#006a63",
+                        "secondary-fixed": "#abefe8",
+                        "outline": "#6e7977",
+                        "outline-variant": "#bdc9c6",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#734700",
+                        "on-secondary-fixed-variant": "#00504b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-padding": "80px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "48px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "label-sm": ["Inter"],
+                        "h1-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.8", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "label-sm": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h1-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h1": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Focus ring utility */
+        .input-focus-ring:focus {
+            outline: none;
+            border-color: #0F766E;
+            box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md dark:bg-on-background/90 border-b border-outline-variant/30 shadow-sm dark:shadow-none transition-all duration-300"><div class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-20"><div class="flex items-center gap-4"><a class="flex items-center" href="#"><img alt="Sarana Berbagi Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI6ZoQiQb_gRHKonZrYVe8ROH7uY7pIl6sVV4FYQgYn8c_pr4A6KV1z3waK877m2DAQIlQYylE07ixOLV7N1uhWU-M6RK04tE9ShJgFt_a-TXJjSkWRsSTQVnwJFnIH45Beb3BQC1nSpcidgxTDnfcAeIa5tnReB8AnogfQKACKMyklB5hHwUAQzCnAfwJvfHJcGCOfev-2XQe1Hr0qtWL74ps_BWbxwaMSiD2w4dhGCWr2y7ofnUDhQ8rkjhYHcPknCo"></a></div><div class="hidden md:flex items-center gap-8"><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md" href="#">Tentang Kami</a><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md" href="#">Program</a><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md" href="#">Kabar</a></div><div class="flex items-center gap-4"></div></div></nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-section-padding px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Progress Indicator -->
+<div class="max-w-3xl mx-auto mb-12">
+<div class="flex items-center justify-between mb-4 relative">
+<!-- Line -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-surface-container-high rounded-full z-0"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-1 bg-primary-container rounded-full z-0"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm shadow-md">
+<span class="material-symbols-outlined text-sm icon-filled">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-container mt-2">Nominal</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm shadow-md ring-4 ring-primary-container/20">
+                        2
+                    </div>
+<span class="font-label-sm text-label-sm text-primary-container mt-2 font-bold">Data Diri</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-outline flex items-center justify-center font-bold text-sm">
+                        3
+                    </div>
+<span class="font-label-sm text-label-sm text-outline mt-2">Pembayaran</span>
+</div>
+</div>
+</div>
+<div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Form Section -->
+<div class="md:col-span-8 space-y-8">
+<div>
+<h1 class="font-h2 text-h2 text-on-surface mb-2">Informasi Donatur</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Lengkapi data diri Anda untuk melanjutkan proses donasi. Kami menjaga privasi data Anda dengan aman.</p>
+</div>
+<form class="bg-surface-container-lowest rounded-[16px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.05)] border border-outline-variant/30 space-y-6">
+<!-- Name Input -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-2" for="name">Nama Lengkap</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline-variant input-focus-ring font-body-md text-body-md transition-all" id="name" placeholder="Masukkan nama lengkap Anda" type="text">
+</div>
+</div>
+<!-- Email Input -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-2" for="email">Alamat Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">mail</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline-variant input-focus-ring font-body-md text-body-md transition-all" id="email" placeholder="contoh@email.com" type="email">
+</div>
+<p class="mt-1 font-body-md text-[13px] text-on-surface-variant">Bukti donasi akan dikirimkan ke email ini.</p>
+</div>
+<!-- Phone Input -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-2" for="phone">Nomor WhatsApp</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-outline font-body-md text-body-md">+62</span>
+<input class="w-full pl-14 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline-variant input-focus-ring font-body-md text-body-md transition-all" id="phone" placeholder="81234567890" type="tel">
+</div>
+</div>
+<!-- Anonymous Checkbox -->
+<div class="flex items-start bg-surface-container-low p-4 rounded-lg border border-outline-variant/30">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 rounded border-outline-variant text-primary-container focus:ring-primary-container bg-surface-bright transition-all" id="anonymous" type="checkbox">
+</div>
+<div class="ml-3">
+<label class="font-label-sm text-label-sm text-on-surface cursor-pointer" for="anonymous">Donasi sebagai Hamba Allah (Anonim)</label>
+<p class="font-body-md text-[13px] text-on-surface-variant mt-1">Nama Anda tidak akan ditampilkan di halaman kampanye.</p>
+</div>
+</div>
+<!-- Message Textarea -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface mb-2" for="message">Tulis Doa atau Pesan <span class="text-outline font-normal">(Opsional)</span></label>
+<textarea class="w-full p-4 rounded-lg border border-outline-variant bg-surface-bright text-on-surface placeholder:text-outline-variant input-focus-ring font-body-md text-body-md transition-all resize-none" id="message" placeholder="Semoga donasi ini bermanfaat..." rows="4"></textarea>
+</div>
+</form>
+</div>
+<!-- Summary Sidebar -->
+<div class="md:col-span-4">
+<div class="sticky top-28 bg-surface-container-lowest rounded-[24px] p-6 shadow-[0_4px_20px_rgba(15,23,42,0.05)] border border-outline-variant/30">
+<h3 class="font-h3 text-h3 text-on-surface mb-6 border-b border-outline-variant/30 pb-4">Ringkasan Donasi</h3>
+<div class="space-y-4 mb-6">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Kampanye</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold line-clamp-2">Bantuan Mendesak untuk Korban Bencana Alam di Cianjur</p>
+</div>
+
+</div>
+<button class="w-full bg-primary-container hover:bg-surface-tint text-on-primary font-label-sm text-label-sm py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center group active:scale-[0.98]">
+                        Pilih Metode Pembayaran
+                        <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="mt-4 flex items-center justify-center text-outline gap-2">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="font-body-md text-[12px]">Transaksi aman dan terenkripsi</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
