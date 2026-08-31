@@ -29,8 +29,8 @@ class AidRequestsTable
                 TextColumn::make('phone')
                     ->label('WhatsApp / Telepon')
                     ->searchable(),
-                TextColumn::make('aid_type')
-                    ->label('Jenis Bantuan')
+                TextColumn::make('campaign.title')
+                    ->label('Program')
                     ->searchable()
                     ->badge()
                     ->color('info'),
@@ -65,6 +65,11 @@ class AidRequestsTable
                         'rejected' => 'Ditolak',
                         'disbursed' => 'Disalurkan',
                     ]),
+                // program juga difilter, konsisten dgn kolomnya
+                SelectFilter::make('campaign_id')
+                    ->label('Program')
+                    ->relationship('campaign', 'title')
+                    ->searchable(),
             ])
             ->recordActions([
                 ActionGroup::make([
@@ -146,13 +151,14 @@ class AidRequestsTable
                         ->label('Hubungi WhatsApp')
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
                         ->color('success')
-                        ->visible(fn (AidRequest $record): bool => !empty($record->phone))
+                        ->visible(fn (AidRequest $record): bool => ! empty($record->phone))
                         ->url(function (AidRequest $record): string {
                             $phone = preg_replace('/[^0-9]/', '', $record->phone);
                             if (str_starts_with($phone, '0')) {
-                                $phone = '62' . substr($phone, 1);
+                                $phone = '62'.substr($phone, 1);
                             }
-                            $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim Sarana Berbagi mengenai permohonan bantuan ({$record->aid_type}) yang Anda ajukan.");
+                            $program = $record->campaign?->title ?? 'bantuan yang diajukan';
+                            $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim Sarana Berbagi mengenai permohonan {$program} yang Anda ajukan.");
                             return "https://wa.me/{$phone}?text={$msg}";
                         })
                         ->openUrlInNewTab(),

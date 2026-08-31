@@ -12,6 +12,11 @@ class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

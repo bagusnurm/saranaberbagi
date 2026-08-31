@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AidRequests\Schemas;
 
 use App\Models\AidRequest;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
@@ -34,8 +35,8 @@ class AidRequestInfolist
                                 ->copyable()
                                 ->copyMessage('Nomor disalin'),
 
-                            TextEntry::make('aid_type')
-                                ->label('Jenis Bantuan')
+                            TextEntry::make('campaign.title')
+                                ->label('Program')
                                 ->icon('heroicon-o-gift')
                                 ->badge()
                                 ->color('gray'),
@@ -79,22 +80,59 @@ class AidRequestInfolist
                             ->visible(fn (?string $state): bool => filled($state)),
                     ]),
 
-                Section::make('Berkas Pendukung')
+                Section::make('Data Penerima')
+                    ->icon('heroicon-o-identification')
+                    ->schema([
+                        Grid::make(2)->schema([
+                            TextEntry::make('nik')->label('NIK'),
+                            TextEntry::make('kk_number')->label('No. KK'),
+                            TextEntry::make('birthdate')->label('Tanggal Lahir')->date(),
+                            TextEntry::make('gender')->label('Jenis Kelamin')
+                                ->formatStateUsing(fn (string $state) => $state === 'male' ? 'Pria' : 'Wanita'),
+                            TextEntry::make('occupation')->label('Pekerjaan')->placeholder('-'),
+                            TextEntry::make('marital_status')->label('Status Marital')
+                                ->formatStateUsing(fn (string $state) => str($state)->replace('_', ' ')->title()),
+                            TextEntry::make('is_mualaf')->label('Mualaf')->badge()
+                                ->formatStateUsing(fn (bool $state) => $state ? 'Ya' : 'Tidak')
+                                ->color(fn (bool $state) => $state ? 'success' : 'gray'),
+                        ]),
+                        TextEntry::make('full_address')
+                            ->label('Alamat')
+                            ->state(fn (AidRequest $record): string => "{$record->address}, {$record->village}, {$record->city}, {$record->province}")
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make('Foto & Video')
                     ->icon('heroicon-o-paper-clip')
                     ->schema([
-                        TextEntry::make('supporting_document')
-                            ->label('Dokumen Terlampir')
-                            ->icon('heroicon-o-document-arrow-down')
-                            ->formatStateUsing(fn (string $state): string => basename($state))
-                            // ganti 'public' kalau file disimpan di disk lain
-                            ->url(function (string $state): string {
-                                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-                                $disk = Storage::disk('public');
-                                return $disk->url($state);
-                            })
-                            ->openUrlInNewTab(),
+                        ImageEntry::make('photos')
+                            ->label('Foto')
+                            ->disk('public')
+                            ->size(80)
+                            ->visible(fn (?array $state): bool => filled($state)),
+
+                        // stdlib TextEntry + html(): belum ada VideoEntry bawaan Filament,
+                        // jadi cukup list link yang buka file di tab baru.
+                        TextEntry::make('videos')
+                            ->label('Video')
+                            ->html()
+                            ->formatStateUsing(fn (?array $state): string => collect($state)
+                                ->map(fn (string $path) => '<a href="'.Storage::disk('public')->url($path).'" target="_blank" class="underline">'.basename($path).'</a>')
+                                ->implode('<br>'))
+                            ->visible(fn (?array $state): bool => filled($state)),
                     ])
-                    ->visible(fn (?AidRequest $record): bool => filled($record?->supporting_document)),
+                    ->visible(fn (?AidRequest $record): bool => filled($record?->photos) || filled($record?->videos)),
+
+                Section::make('Detail Penyaluran')
+                    ->icon('heroicon-o-banknotes')
+                    ->schema([
+                        Grid::make(2)->schema([
+                            TextEntry::make('fund_needed')->label('Kebutuhan Biaya')->money('IDR'),
+                            TextEntry::make('bank_name')->label('Bank'),
+                            TextEntry::make('bank_account_number')->label('No. Rekening')->copyable(),
+                            TextEntry::make('bank_account_holder')->label('Atas Nama'),
+                        ]),
+                    ]),
 
                 Section::make('Riwayat Waktu')
                     ->icon('heroicon-o-clock')

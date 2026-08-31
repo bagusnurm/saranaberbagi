@@ -6,27 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AidRequest extends Model
+class CampaignComment extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-
-    protected $casts = [
-        'birthdate'   => 'date',
-        'is_mualaf'   => 'boolean',
-        'photos'      => 'array',
-        'videos'      => 'array',
-        'fund_needed' => 'decimal:2',
-    ];
 
     public function campaign(): BelongsTo
     {
         return $this->belongsTo(Campaign::class);
     }
 
-    public function admin(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'verified_by');
+        return $this->belongsTo(User::class);
     }
 }

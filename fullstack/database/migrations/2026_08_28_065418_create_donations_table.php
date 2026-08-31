@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number')->unique();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); 
             $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->nullOnDelete();
             $table->foreignId('payment_method_id')->constrained();
             $table->string('donor_name');

@@ -10,6 +10,11 @@ class CreateCategoryCampaign extends CreateRecord
 {
     protected static string $resource = CategoryCampaignResource::class;
 
+     protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

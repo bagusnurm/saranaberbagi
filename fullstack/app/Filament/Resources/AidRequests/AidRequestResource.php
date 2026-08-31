@@ -42,11 +42,6 @@ class AidRequestResource extends Resource
         return false;
     }
 
-    public static function form(Schema $schema): Schema
-    {
-        return AidRequestForm::configure($schema);
-    }
-
     public static function infolist(Schema $schema): Schema
     {
         return AidRequestInfolist::configure($schema);

@@ -33,4 +33,9 @@ class Campaign extends Model
     {
         return $this->hasMany(Donation::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(CampaignComment::class)->latest();
+    }
 }

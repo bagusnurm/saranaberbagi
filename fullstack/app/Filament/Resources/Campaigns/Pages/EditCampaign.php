@@ -21,4 +21,9 @@ class EditCampaign extends EditRecord
                 ->url(static::getResource()::getUrl('index')),
         ];
     }
+
+     protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
