@@ -183,7 +183,7 @@
         </section>
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- 1 Berbagi Al-Qur'an -->
-            <div
+            <div data-program="berbagi-al-quran"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -194,13 +194,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Berbagi Al-Qur'an</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Hadiahkan Mushaf,
                         Tebarkan Pahala Tanpa Putus.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 2 Berbagi Sembako -->
-            <div
+            <div data-program="berbagi-sembako"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -211,13 +219,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Berbagi Sembako</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Sembako dari Anda,
                         Nafkah untuk Mereka.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 3 Fidyah -->
-            <div
+            <div data-program="sarana-berbagi-fidyah"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -228,13 +244,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Berbagi Fidyah</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Mudah Menunaikan,
                         Tepat Menyalurkan.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 4 Karpet -->
-            <div
+            <div data-program="sarana-berbagi-karpet"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -245,13 +269,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Berbagi Karpet</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bentangkan Karpet,
                         Sebarkan Pahala.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 5 YASABI BERANI -->
-            <div
+            <div data-program="yasabi-berani"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -262,13 +294,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">YASABI BERANI</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Yasabi Berbagi
                         Anugerah Idul Adha.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 6 Sedekah Daging -->
-            <div
+            <div data-program="sedekah-daging"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -279,13 +319,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sedekah Daging</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Satu Bungkus Daging,
                         Sejuta Kebahagiaan.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 7 Kafarat -->
-            <div
+            <div data-program="sarana-kafarat"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -297,13 +345,21 @@
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Menyalurkan kafarat
                         dari berbagai jenis pelanggaran (batal puasa wajib tanpa uzur, melanggar sumpah, atau membunuh
                         tanpa sengaja).</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 8 Kado Guru Ngaji -->
-            <div
+            <div data-program="kado-guru-ngaji"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -314,13 +370,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Kado Guru Ngaji</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Hadiah Kecil untuk
                         Pahlawan yang Tak Terdengar.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 9 BERDAYA -->
-            <div
+            <div data-program="berdaya"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -331,13 +395,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">BERDAYA</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Beras Dhuafa dan
                         Yatim - Karena Mereka Berhak Hidup Lebih Berdaya.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 10 JURAGAN -->
-            <div
+            <div data-program="juragan"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -348,13 +420,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">JURAGAN</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Jum'at Ragam
                         Kebaikan - Setiap Jumat, Tebar Banyak Manfaat.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 11 Masjid -->
-            <div
+            <div data-program="sarana-membangun-masjid"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -365,13 +445,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Membangun Masjid</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bersama Bangun Rumah
                         Allah, Tebar Pahala Tak Berujung.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 12 Peduli Bencana -->
-            <div
+            <div data-program="sarana-peduli-bencana"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -382,13 +470,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Peduli Bencana</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Tanggap Cepat,
                         Peduli Nyata.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 13 Subuh Berkah -->
-            <div
+            <div data-program="subuh-berkah"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -399,13 +495,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Subuh Berkah</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Rutinkan Sedekah,
                         Jemput Berkah di Waktu Mustajab.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 14 Sarana Sedekah -->
-            <div
+            <div data-program="sarana-sedekah"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -416,13 +520,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Sedekah</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Jadi Jalan Kebaikan
                         untuk Banyak Orang.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 15 Sarana Sehat -->
-            <div
+            <div data-program="sarana-sehat"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -433,13 +545,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Sehat</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Ringankan Derita,
                         Tebarkan Cinta Sehat.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 16 Borong Jajanan -->
-            <div
+            <div data-program="sarana-borong-jajanan"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -450,13 +570,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Borong Jajanan</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Bantu Pedagang,
                         Bahagiakan yang Berbuka.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 17 Senin Kamis -->
-            <div
+            <div data-program="senin-kamis-berbagi"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -467,13 +595,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Senin Kamis Berbagi</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Berbagi Buka, Tebar
                         Pahala Puasa Sunnah.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 18 Wakaf Air Sumur -->
-            <div
+            <div data-program="sarana-wakaf-air-sumur"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -484,13 +620,21 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Wakaf Air Sumur</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Alirkan Kebaikan,
                         Hidupkan Harapan.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
             <!-- 19 Air Bersih -->
-            <div
+            <div data-program="sarana-air-bersih"
                 class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] hover:shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-all duration-300 flex flex-col group border border-outline-variant/20">
                 <div class="relative h-48 w-full overflow-hidden"><img
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -501,8 +645,16 @@
                     <h3 class="font-h3 text-h3 text-on-surface mb-2 line-clamp-2">Sarana Air Bersih</h3>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Setetes Air, Sejuta
                         Kehidupan.</p>
-                    <div class="mt-auto"><a href="{{ url('/donasi') }}"
-                            class="block w-full bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
+                    <div class="mt-auto"><button type="button"
+                                class="comment-btn flex-1 flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface-variant font-label-sm text-label-sm px-6 py-3 rounded-lg hover:border-primary hover:text-primary transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                                <span>Komentar</span>
+                                <span
+                                    class="comment-count ml-1 bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs font-bold min-w-[24px]"
+                                    data-count-for>0</span>
+                            </button>
+                            <a href="{{ url('/donasi') }}"
+                            class="block w-full flex-1 bg-[#F59E0B] text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 text-center">Donasi</a>
                     </div>
                 </div>
             </div>
@@ -518,6 +670,293 @@
             <p class="mt-4 text-white/80 text-sm">&copy; 2026 Yayasan Sarana Berbagi</p>
         </div>
     </footer>
+
+    <!-- Modal Komentar Program -->
+    <div id="commentModal"
+        class="fixed inset-0 z-[100] items-center justify-center p-4 md:p-8 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-on-background/60 backdrop-blur-sm" data-close-comment></div>
+        <div id="commentModalPanel"
+            class="relative bg-surface rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col scale-95 transition-transform duration-300">
+            <!-- Header -->
+            <div class="flex items-start justify-between gap-4 p-6 border-b border-outline-variant/30">
+                <div>
+                    <h3 class="font-h3 text-h3 text-on-surface leading-snug" id="commentProgramTitle">Komentar Program
+                    </h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mt-1" id="commentProgramSubtitle">Bagikan
+                        dukungan Anda untuk program ini</p>
+                </div>
+                <button type="button"
+                    class="shrink-0 w-10 h-10 rounded-full bg-surface-container-low hover:bg-surface-variant flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors"
+                    data-close-comment>
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <!-- Form -->
+            <form id="commentForm" class="p-6 border-b border-outline-variant/30 flex flex-col gap-4"
+                data-program="">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="commentName" class="block font-label-sm text-label-sm text-on-surface mb-2">Nama
+                            <span class="text-error">*</span></label>
+                        <input id="commentName" name="name" type="text" required maxlength="100"
+                            placeholder="Nama Anda"
+                            class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
+                    </div>
+                    <div>
+                        <label for="commentEmail"
+                            class="block font-label-sm text-label-sm text-on-surface mb-2">Email <span
+                                class="text-outline text-xs">(opsional)</span></label>
+                        <input id="commentEmail" name="email" type="email" maxlength="191" placeholder="email@contoh.com"
+                            class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all">
+                    </div>
+                </div>
+                <div>
+                    <label for="commentContent" class="block font-label-sm text-label-sm text-on-surface mb-2">Komentar
+                        <span class="text-error">*</span></label>
+                    <textarea id="commentContent" name="content" rows="3" required minlength="3" maxlength="1000"
+                        placeholder="Tulis komentar, doa, atau dukungan Anda..."
+                        class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"></textarea>
+                    <div class="flex justify-between mt-2">
+                        <p id="commentError" class="text-error font-body-md text-sm hidden"></p>
+                        <p class="font-body-md text-xs text-outline ml-auto"><span id="commentCharCount">0</span>/1000
+                        </p>
+                    </div>
+                </div>
+                <button type="submit" id="commentSubmitBtn"
+                    class="self-start bg-primary text-on-primary font-label-sm text-label-sm px-8 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm active:scale-95 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">send</span>
+                    <span>Kirim Komentar</span>
+                </button>
+            </form>
+            <!-- Daftar Komentar -->
+            <div id="commentList" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-surface-container-low/50">
+                <!-- Diisi lewat JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="commentToast"
+        class="fixed bottom-6 right-6 z-[110] bg-on-surface text-surface font-label-sm text-label-sm px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
+        <span class="material-symbols-outlined text-primary-fixed">check_circle</span>
+        <span id="commentToastText">Komentar terkirim!</span>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const CSRF = '{{ csrf_token() }}';
+            const modal = document.getElementById('commentModal');
+            const panel = document.getElementById('commentModalPanel');
+            const list = document.getElementById('commentList');
+            const form = document.getElementById('commentForm');
+            const errBox = document.getElementById('commentError');
+            const charCount = document.getElementById('commentCharCount');
+            const submitBtn = document.getElementById('commentSubmitBtn');
+            const toast = document.getElementById('commentToast');
+            const toastText = document.getElementById('commentToastText');
+
+            let currentProgram = '';
+            let currentProgramTitle = '';
+
+            // Wadah jumlah komentar per program (dari endpoint counts)
+            const counts = {};
+
+            function slugToTitle(slug) {
+                return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            // ---------- Badge jumlah komentar ----------
+            function applyCounts() {
+                document.querySelectorAll('[data-program]').forEach(function(card) {
+                    const slug = card.dataset.program;
+                    const badge = card.querySelector('[data-count-for]');
+                    if (badge && counts[slug] !== undefined) {
+                        badge.textContent = counts[slug];
+                    }
+                });
+            }
+
+            fetch('{{ url('/program/comments/counts') }}')
+                .then(r => r.json())
+                .then(data => {
+                    Object.assign(counts, data.counts || {});
+                    applyCounts();
+                })
+                .catch(() => {});
+
+            // ---------- Modal ----------
+            function openModal(card) {
+                currentProgram = card.dataset.program;
+                currentProgramTitle = slugToTitle(currentProgram);
+                document.getElementById('commentProgramTitle').textContent = currentProgramTitle;
+                form.dataset.program = currentProgram;
+                errBox.classList.add('hidden');
+                renderSkeleton();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                requestAnimationFrame(() => {
+                    modal.classList.remove('opacity-0');
+                    panel.classList.remove('scale-95');
+                });
+                document.body.style.overflow = 'hidden';
+                loadComments();
+            }
+
+            function closeModal() {
+                modal.classList.add('opacity-0');
+                panel.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = '';
+                }, 250);
+            }
+
+            document.querySelectorAll('.comment-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const card = btn.closest('[data-program]');
+                    if (card) openModal(card);
+                });
+            });
+
+            document.querySelectorAll('[data-close-comment]').forEach(function(el) {
+                el.addEventListener('click', closeModal);
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+            });
+
+            // ---------- Load & render komentar ----------
+            function renderSkeleton() {
+                list.innerHTML = Array(3).fill(
+                    '<div class="animate-pulse flex gap-3"><div class="w-10 h-10 rounded-full bg-surface-variant shrink-0"></div><div class="flex-1 space-y-2 py-1"><div class="h-3 bg-surface-variant rounded w-1/4"></div><div class="h-3 bg-surface-variant rounded w-3/4"></div></div></div>'
+                ).join('');
+            }
+
+            function renderComments(data) {
+                if (!data.comments.length) {
+                    list.innerHTML =
+                        `<div class="text-center py-10"><span class="material-symbols-outlined text-5xl text-outline">forum</span><p class="font-body-md text-body-md text-on-surface-variant mt-4">Belum ada komentar. Jadilah yang pertama memberi dukungan!</p></div>`;
+                    return;
+                }
+                list.innerHTML = data.comments.map(c => `
+                    <div class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-4 flex gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container font-bold flex items-center justify-center shrink-0">${escapeHtml(c.initial)}</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-baseline justify-between gap-2">
+                                <p class="font-label-sm text-label-sm text-on-surface truncate">${escapeHtml(c.name)}</p>
+                                <span class="font-body-md text-xs text-outline shrink-0">${escapeHtml(c.time_ago)}</span>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant mt-1 break-words">${escapeHtml(c.content)}</p>
+                        </div>
+                    </div>`).join('');
+            }
+
+            function loadComments() {
+                renderSkeleton();
+                fetch(`{{ url('/program/comments') }}?program=${encodeURIComponent(currentProgram)}`)
+                    .then(r => r.json())
+                    .then(renderComments)
+                    .catch(() => {
+                        list.innerHTML =
+                            '<p class="text-center font-body-md text-body-md text-error py-8">Gagal memuat komentar. Coba lagi.</p>';
+                    });
+            }
+
+            // ---------- Submit ----------
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                errBox.classList.add('hidden');
+                const content = document.getElementById('commentContent').value.trim();
+                const name = document.getElementById('commentName').value.trim();
+
+                if (name.length < 2) {
+                    showError('Nama minimal 2 karakter.');
+                    return;
+                }
+                if (content.length < 3) {
+                    showError('Komentar minimal 3 karakter.');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.6';
+
+                const body = new URLSearchParams({
+                    program: form.dataset.program,
+                    name: name,
+                    email: document.getElementById('commentEmail').value.trim(),
+                    content: content,
+                });
+
+                fetch('{{ url('/program/comments') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRF-TOKEN': CSRF,
+                            'Accept': 'application/json',
+                        },
+                        body: body,
+                    })
+                    .then(async r => {
+                        const data = await r.json();
+                        if (!r.ok) throw data;
+                        return data;
+                    })
+                    .then(data => {
+                        form.reset();
+                        charCount.textContent = '0';
+                        showToast(data.message || 'Komentar terkirim!');
+                        loadComments();
+                        // Update badge
+                        if (counts[form.dataset.program] !== undefined) {
+                            counts[form.dataset.program]++;
+                        } else {
+                            counts[form.dataset.program] = 1;
+                        }
+                        applyCounts();
+                    })
+                    .catch(err => {
+                        const msg = (err && err.errors) ?
+                            Object.values(err.errors).flat().join(' ') :
+                            (err && err.message) || 'Gagal mengirim komentar. Coba lagi.';
+                        showError(msg);
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '';
+                    });
+            });
+
+            function showError(msg) {
+                errBox.textContent = msg;
+                errBox.classList.remove('hidden');
+            }
+
+            // ---------- Char count ----------
+            document.getElementById('commentContent').addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+
+            // ---------- Toast ----------
+            let toastTimer;
+            function showToast(msg) {
+                toastText.textContent = msg;
+                toast.classList.remove('opacity-0', 'translate-y-4');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-4'), 3500);
+            }
+        })();
+    </script>
 </body>
 
 </html>

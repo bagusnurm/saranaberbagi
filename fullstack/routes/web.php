@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\ProgramCommentController;
 
 // Halaman publik
 Route::get('/', function () {
@@ -12,6 +13,15 @@ Route::get('/', function () {
 Route::get('/program', function () {
     return view('program');
 });
+
+// Komentar program (dinamis, tersimpan di tabel campaign_comments)
+Route::get('/program/comments/counts', [ProgramCommentController::class, 'counts'])
+    ->name('program.comments.counts');
+Route::get('/program/comments', [ProgramCommentController::class, 'index'])
+    ->name('program.comments.index');
+Route::post('/program/comments', [ProgramCommentController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('program.comments.store');
 
 Route::get('/kabar', function () {
     return view('kabar');

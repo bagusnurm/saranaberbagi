@@ -5,8 +5,9 @@ Tanggal: 31 Agustus 2026
 ## Ringkasan
 
 Dokumen ini merangkum seluruh perubahan sejak commit `b8a4019` (Refactor Code):
-perbaikan setup dependency, pemulihan route halaman publik, dan fitur baru
-halaman **Berita** (`/berita`).
+perbaikan setup dependency, pemulihan route halaman publik, fitur baru
+halaman **Berita** (`/berita`), dan fitur **komentar dinamis** di halaman
+**Program** (`/program`) yang tersimpan di Supabase.
 
 ---
 
@@ -89,7 +90,44 @@ Link **Berita** ditambahkan di navbar semua halaman publik:
 `karir/index.blade.php`, `digital-collaborators/index.blade.php`,
 serta 4 halaman donasi (`step1`, `step2`, `step3`, `konfirmasi`).
 
-## 5. Asset Filament (publish ulang)
+## 5. Fitur Baru: Komentar Dinamis di Halaman Program (`/program`)
+
+Setiap kartu program kini punya tombol **Komentar** dengan badge jumlah.
+Klik membuka modal (AJAX, tanpa reload) berisi form + daftar komentar.
+Komentar tersimpan di tabel `campaign_comments` di **Supabase** (PostgreSQL).
+
+**File baru:**
+
+- `fullstack/app/Http/Controllers/ProgramCommentController.php`
+  - `GET /program/comments?program={slug}` — daftar komentar per program
+  - `POST /program/comments` — simpan komentar (validasi + throttle 10/menit)
+  - `GET /program/comments/counts` — jumlah komentar per program (badge)
+  - Mapping slug kartu program → campaign via konstanta `PROGRAM_SLUG_MAP`
+- `fullstack/app/Models/CampaignComment.php` — model + scope `forCampaign`
+- `fullstack/database/migrations/2026_08_31_061237_create_campaign_comments_table.php`
+  — migration lokal (SQLite); di Supabase tabel sudah ada, cukup diperluas
+- `fullstack/database/seeders/CampaignCommentSeeder.php` — komentar contoh
+
+**File yang dimodifikasi:**
+
+- `fullstack/resources/views/program.blade.php` — `data-program` di 19 kartu,
+  tombol Komentar ber-badge, modal komentar, toast, JavaScript AJAX
+- `fullstack/routes/web.php` — 3 route komentar
+- `fullstack/database/seeders/DatabaseSeeder.php` — panggil `CampaignCommentSeeder`
+
+**Perubahan skema `campaign_comments` di Supabase** (tabel sudah ada sebelumnya
+dengan `id, campaign_id, user_id, comment, timestamps`):
+
+- Kolom baru: `name` (varchar 100, nullable), `email` (varchar 191, nullable),
+  `is_approved` (boolean, default true)
+- `user_id` dibuat nullable (pengunjung publik tidak login) + FK di-drop lalu
+  dibuat ulang sebagai `nullOnDelete`
+- Index `(campaign_id, is_approved, created_at)`
+
+Keamanan: CSRF aktif, validasi server-side (nama 2–100, komentar 3–1000,
+email format), rate limiting `throttle:10,1`, output di-escape di sisi JS.
+
+## 6. Asset Filament (publish ulang)
 
 **File:** `fullstack/public/js/filament/**`, `fullstack/public/css/filament/**`,
 `fullstack/public/fonts/filament/**`
