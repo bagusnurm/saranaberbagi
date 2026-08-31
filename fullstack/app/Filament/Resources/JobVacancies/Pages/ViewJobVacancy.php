@@ -14,9 +14,11 @@ class ViewJobVacancy extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->color('info'),
             Action::make('back')
                 ->label('Kembali')
+                ->color('gray')
                 ->icon('heroicon-o-arrow-left')
                 ->url(static::getResource()::getUrl('index')),
         ];

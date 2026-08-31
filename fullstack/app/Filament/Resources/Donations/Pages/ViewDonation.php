@@ -16,6 +16,12 @@ class ViewDonation extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+
             Action::make('verify')
                 ->label('Verifikasi Pembayaran')
                 ->icon('heroicon-o-check-circle')
@@ -27,7 +33,7 @@ class ViewDonation extends ViewRecord
                 ->action(function (Donation $record): void {
                     $record->update([
                         'status' => 'verified',
-                        'verified_by' => auth()->id(),
+                        'verified_by' => filament()->auth()->id(),
                     ]);
 
                     if ($record->campaign) {

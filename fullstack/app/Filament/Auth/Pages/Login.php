@@ -11,10 +11,15 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
 use Illuminate\Validation\ValidationException;
 
 class Login extends BaseLogin
 {
+    // Pakai layout split-screen custom yang sama dengan Register.
+    protected static string $layout = 'filament.layouts.split-auth';
+
     public function authenticate(): ?LoginResponse
     {
         $this->throttleIfTooManyAttempts();
@@ -63,7 +68,13 @@ class Login extends BaseLogin
             ->placeholder('Masukkan kata sandi Anda')
             ->password()
             ->revealable()
+            ->prefixIcon('heroicon-o-lock-closed')
             ->required()
+            ->hint(fn () => filament()->hasPasswordReset()
+                ? new HtmlString(Blade::render(
+                    '<x-filament::link :href="filament()->getRequestPasswordResetUrl()" tabindex="3">Lupa kata sandi?</x-filament::link>'
+                ))
+                : null)
             ->extraInputAttributes(['tabindex' => 2]);
     }
 

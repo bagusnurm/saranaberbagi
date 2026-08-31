@@ -16,6 +16,7 @@ class CreateUser extends CreateRecord
             Action::make('back')
                 ->label('Kembali')
                 ->icon('heroicon-o-arrow-left')
+                ->color('gray')
                 ->url(static::getResource()::getUrl('index')),
         ];
     }

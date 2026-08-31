@@ -6,6 +6,7 @@ use App\Filament\Resources\AidRequests\Pages\EditAidRequest;
 use App\Filament\Resources\AidRequests\Pages\ListAidRequests;
 use App\Filament\Resources\AidRequests\Pages\ViewAidRequest;
 use App\Filament\Resources\AidRequests\Schemas\AidRequestForm;
+use App\Filament\Resources\AidRequests\Schemas\AidRequestInfolist;
 use App\Filament\Resources\AidRequests\Tables\AidRequestsTable;
 use App\Models\AidRequest;
 use BackedEnum;
@@ -32,7 +33,7 @@ class AidRequestResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Permohonan Bantuan';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 1; 
 
     protected static ?string $recordTitleAttribute = 'applicant_name';
 
@@ -44,6 +45,11 @@ class AidRequestResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return AidRequestForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return AidRequestInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

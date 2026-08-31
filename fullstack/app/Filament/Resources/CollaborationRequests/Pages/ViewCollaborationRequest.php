@@ -17,6 +17,12 @@ class ViewCollaborationRequest extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+
             Action::make('review')
                 ->label('Tandai Sedang Ditinjau')
                 ->icon('heroicon-o-eye')

@@ -4,6 +4,8 @@ namespace App\Providers\Filament;
 
 use App\Filament\Auth\Pages\Login;
 use App\Filament\Auth\Pages\Register;
+use App\Filament\Auth\Pages\RequestPasswordReset;
+use App\Filament\Auth\Pages\ResetPassword;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
@@ -38,11 +40,12 @@ class AuthPanelProvider extends PanelProvider
     {
         return $panel
             ->id('auth')
-            ->path('auth') // hasil: /auth/login & /auth/register
-            ->authGuard('web') // WAJIB sama dengan guard di AdminPanelProvider
+            ->path('auth') 
+            ->authGuard('web') 
             ->login(Login::class)
             ->registration(Register::class)
-            ->brandLogo(fn () => view('logo-change.logo')) // biar tampilannya konsisten dg admin
+            ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
+            ->brandLogo(fn () => view('logo-change.logo'))
             ->favicon(asset('images/favicon.webp'))
             ->darkMode(false)
             ->colors([

@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\CampaignOverview;
+use App\Filament\Widgets\CampaignProgressChart;
+use App\Filament\Widgets\PendingDonationsWidget;
+use App\Filament\Widgets\PlatformOverview;
 use App\Http\Middleware\RedirectToAuthPanelLogin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -49,6 +53,10 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
+                CampaignOverview::class,
+                PlatformOverview::class,
+                PendingDonationsWidget::class,
+                CampaignProgressChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

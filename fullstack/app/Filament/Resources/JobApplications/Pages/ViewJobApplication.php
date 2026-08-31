@@ -16,6 +16,12 @@ class ViewJobApplication extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+
             Action::make('mark_review')
                 ->label('Tinjau Lamaran (Review)')
                 ->icon('heroicon-o-document-magnifying-glass')
@@ -117,8 +123,6 @@ class ViewJobApplication extends ViewRecord
                     return "mailto:{$record->email}?subject={$subject}";
                 })
                 ->openUrlInNewTab(),
-
-            EditAction::make(),
         ];
     }
 }

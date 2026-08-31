@@ -15,6 +15,9 @@ use Illuminate\Validation\Rules\Password;
 
 class Register extends BaseRegister
 {
+    // Pakai layout split-screen custom, bukan card di tengah bawaan Filament.
+    protected static string $layout = 'filament.layouts.split-auth';
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -50,6 +53,7 @@ class Register extends BaseRegister
         return TextInput::make('name')
             ->label('Nama Pengguna')
             ->placeholder('Masukkan nama pengguna Anda')
+            ->prefixIcon('heroicon-o-user')
             ->required()
             ->maxLength(255)
             ->autofocus()
@@ -62,6 +66,7 @@ class Register extends BaseRegister
             ->label('Alamat Email')
             ->placeholder('nama@email.com')
             ->email()
+            ->prefixIcon('heroicon-o-envelope')
             ->required()
             ->maxLength(255)
             ->unique(User::class)
@@ -75,6 +80,7 @@ class Register extends BaseRegister
             ->placeholder('Masukkan kata sandi Anda')
             ->password()
             ->revealable()
+            ->prefixIcon('heroicon-o-lock-closed')
             ->required()
             ->rule(Password::default())
             ->same('passwordConfirmation')
@@ -89,6 +95,7 @@ class Register extends BaseRegister
             ->placeholder('Masukkan ulang kata sandi Anda')
             ->password()
             ->revealable()
+            ->prefixIcon('heroicon-o-shield-check')
             ->required()
             ->dehydrated(false)
             ->extraInputAttributes(['tabindex' => 4]);

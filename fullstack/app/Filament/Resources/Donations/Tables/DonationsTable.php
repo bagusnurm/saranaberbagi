@@ -30,7 +30,7 @@ class DonationsTable
                 TextColumn::make('donor_name')
                     ->label('Donatur')
                     ->searchable()
-                    ->description(fn ($record): ?string => $record->is_anonymous ? 'Hamba Allah' : null),
+                    ->description(fn ($record): ?string => $record->is_anonymous ? 'Fulan' : null),
                 TextColumn::make('campaign.title')
                     ->label('Program Donasi')
                     ->searchable()

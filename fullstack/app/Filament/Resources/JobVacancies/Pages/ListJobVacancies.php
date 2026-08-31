@@ -14,11 +14,10 @@ class ListJobVacancies extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
-            Action::make('back')
-                ->label('Kembali')
-                ->icon('heroicon-o-arrow-left')
-                ->url(static::getResource()::getUrl('index')),
+            CreateAction::make()
+                ->color('success')
+                ->icon('heroicon-o-plus')
+                ->label('Lowongan Kerja Baru'),
         ];
     }
 }

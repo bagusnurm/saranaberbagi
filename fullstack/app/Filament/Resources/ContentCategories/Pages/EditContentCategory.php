@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ContentCategories\Pages;
 
 use App\Filament\Resources\ContentCategories\ContentCategoryResource;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -14,6 +15,11 @@ class EditContentCategory extends EditRecord
     {
         return [
             DeleteAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
         ];
     }
 }

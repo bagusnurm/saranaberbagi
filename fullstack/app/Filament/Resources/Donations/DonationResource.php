@@ -6,6 +6,7 @@ use App\Filament\Resources\Donations\Pages\EditDonation;
 use App\Filament\Resources\Donations\Pages\ListDonations;
 use App\Filament\Resources\Donations\Pages\ViewDonation;
 use App\Filament\Resources\Donations\Schemas\DonationForm;
+use App\Filament\Resources\Donations\Schemas\DonationInfolist;
 use App\Filament\Resources\Donations\Tables\DonationsTable;
 use App\Models\Donation;
 use BackedEnum;
@@ -43,6 +44,11 @@ class DonationResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return DonationForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return DonationInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

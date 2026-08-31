@@ -6,6 +6,7 @@ use App\Filament\Resources\JobApplications\Pages\EditJobApplication;
 use App\Filament\Resources\JobApplications\Pages\ListJobApplications;
 use App\Filament\Resources\JobApplications\Pages\ViewJobApplication;
 use App\Filament\Resources\JobApplications\Schemas\JobApplicationForm;
+use App\Filament\Resources\JobApplications\Schemas\JobApplicationInfolist;
 use App\Filament\Resources\JobApplications\Tables\JobApplicationsTable;
 use App\Models\JobApplication;
 use BackedEnum;
@@ -43,6 +44,11 @@ class JobApplicationResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return JobApplicationForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return JobApplicationInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table

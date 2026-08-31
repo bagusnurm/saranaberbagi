@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -48,12 +50,21 @@ class User extends Authenticatable
         ];
     }
 
-    public function donations(): \Illuminate\Database\Eloquent\Relations\HasMany
+     public function canAccessPanel(Panel $panel): bool
+    {
+        // Cuma role staf (super_admin/admin/volunteer) yang boleh masuk
+        // panel /berbagi. Donatur register lewat /auth tapi nggak
+        // dikasih role apa pun, jadi otomatis ketolak di sini —
+        // mereka tetap bisa donasi & login di frontend seperti biasa.
+        return $this->hasAnyRole(['super_admin', 'admin', 'volunteer']);
+    }
+
+    public function donations(): HasMany
     {
         return $this->hasMany(Donation::class);
     }
 
-    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'author_id');
     }

@@ -5,7 +5,9 @@ namespace App\Filament\Resources\JobVacancies;
 use App\Filament\Resources\JobVacancies\Pages\CreateJobVacancy;
 use App\Filament\Resources\JobVacancies\Pages\EditJobVacancy;
 use App\Filament\Resources\JobVacancies\Pages\ListJobVacancies;
+use App\Filament\Resources\JobVacancies\Pages\ViewJobVacancy;
 use App\Filament\Resources\JobVacancies\Schemas\JobVacancyForm;
+use App\Filament\Resources\JobVacancies\Schemas\JobVacancyInfolist;
 use App\Filament\Resources\JobVacancies\Tables\JobVacanciesTable;
 use App\Models\JobVacancy;
 use BackedEnum;
@@ -40,6 +42,11 @@ class JobVacancyResource extends Resource
         return JobVacancyForm::configure($schema);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return JobVacancyInfolist::configure($schema);
+    }
+
     public static function table(Table $table): Table
     {
         return JobVacanciesTable::configure($table);
@@ -58,6 +65,7 @@ class JobVacancyResource extends Resource
             'index' => ListJobVacancies::route('/'),
             'create' => CreateJobVacancy::route('/create'),
             'edit' => EditJobVacancy::route('/{record}/edit'),
+            'view' => ViewJobVacancy::route('/{record}'),
         ];
     }
 }

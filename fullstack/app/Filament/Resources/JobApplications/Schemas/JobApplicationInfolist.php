@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\CollaborationRequests\Schemas;
+namespace App\Filament\Resources\JobApplications\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
@@ -8,27 +8,26 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\TextSize;
-use Illuminate\Support\Facades\Storage;
 
-class CollaborationRequestInfolist
+class JobApplicationInfolist
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Data Pemohon')
-                    ->icon('heroicon-o-building-office-2')
+                Section::make('Data Pelamar')
+                    ->icon('heroicon-o-user')
                     ->schema([
-                        TextEntry::make('institution_name')
-                            ->label('Nama Instansi')
+                        TextEntry::make('name')
+                            ->label('Nama Pelamar')
                             ->size(TextSize::Large)
                             ->weight(FontWeight::Bold)
-                            ->icon('heroicon-o-building-office')
+                            ->icon('heroicon-o-identification')
                             ->columnSpanFull(),
 
                         Grid::make(2)->schema([
                             TextEntry::make('email')
-                                ->label('Alamat Email')
+                                ->label('Email')
                                 ->icon('heroicon-o-envelope')
                                 ->copyable(),
 
@@ -39,50 +38,51 @@ class CollaborationRequestInfolist
                         ]),
                     ]),
 
-                Section::make('Detail Kerja Sama')
-                    ->icon('heroicon-o-hand-raised')
+                Section::make('Detail Lamaran')
+                    ->icon('heroicon-o-document-text')
                     ->schema([
                         Grid::make(2)->schema([
-                            TextEntry::make('collaboration_type')
-                                ->label('Jenis Kerja Sama')
-                                ->badge()
-                                ->color('gray'),
+                            TextEntry::make('position')
+                                ->label('Posisi yang Dilamar')
+                                ->icon('heroicon-o-briefcase'),
 
                             // ganti opsi status ini sesuai enum asli di model
                             TextEntry::make('status')
-                                ->label('Status Permohonan')
+                                ->label('Status Lamaran')
                                 ->badge()
                                 ->formatStateUsing(fn (string $state): string => match ($state) {
-                                    'pending' => 'Menunggu Tinjauan',
-                                    'approved' => 'Disetujui',
+                                    'applied' => 'Baru Masuk',
+                                    'reviewed' => 'Ditinjau',
+                                    'interview' => 'Wawancara',
+                                    'accepted' => 'Diterima',
                                     'rejected' => 'Ditolak',
                                     default => ucfirst($state),
                                 })
                                 ->color(fn (string $state): string => match ($state) {
-                                    'pending' => 'warning',
-                                    'approved' => 'success',
+                                    'applied' => 'gray',
+                                    'reviewed' => 'info',
+                                    'interview' => 'warning',
+                                    'accepted' => 'success',
                                     'rejected' => 'danger',
                                     default => 'gray',
                                 }),
                         ]),
-                    ]),
 
-                Section::make('Lampiran')
-                    ->icon('heroicon-o-paper-clip')
-                    ->schema([
-                        TextEntry::make('attachment')
-                            ->label('Berkas Terlampir')
+                        TextEntry::make('cover_letter')
+                            ->label('Surat Lamaran')
+                            ->prose()
+                            ->columnSpanFull()
+                            ->placeholder('Tidak menyertakan surat lamaran'),
+
+                        // resume_url diasumsikan sudah full URL, bukan path storage
+                        TextEntry::make('resume_url')
+                            ->label('Resume / CV')
                             ->icon('heroicon-o-document-arrow-down')
-                            ->formatStateUsing(fn (string $state): string => basename($state))
-                            ->url(function (string $state): string {
-                                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-                                $disk = Storage::disk('public');
-                                return $disk->url($state);
-                            })
-                            ->openUrlInNewTab(),
-                    ])
-                    // Section, bukan Entry -> cek lewat $record, bukan $state
-                    ->visible(fn ($record): bool => filled($record?->attachment)),
+                            ->formatStateUsing(fn (): string => 'Buka Resume')
+                            ->url(fn (string $state): string => $state)
+                            ->openUrlInNewTab()
+                            ->placeholder('Tidak ada resume terlampir'),
+                    ]),
 
                 Section::make('Riwayat Waktu')
                     ->icon('heroicon-o-clock')
@@ -90,8 +90,8 @@ class CollaborationRequestInfolist
                     ->collapsed()
                     ->schema([
                         Grid::make(2)->schema([
-                            TextEntry::make('created_at')
-                                ->label('Diajukan Pada')
+                            TextEntry::make('applied_at')
+                                ->label('Tanggal Melamar')
                                 ->since()
                                 ->dateTimeTooltip(),
 

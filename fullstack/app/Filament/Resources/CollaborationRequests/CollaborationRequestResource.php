@@ -6,6 +6,7 @@ use App\Filament\Resources\CollaborationRequests\Pages\EditCollaborationRequest;
 use App\Filament\Resources\CollaborationRequests\Pages\ListCollaborationRequests;
 use App\Filament\Resources\CollaborationRequests\Pages\ViewCollaborationRequest;
 use App\Filament\Resources\CollaborationRequests\Schemas\CollaborationRequestForm;
+use App\Filament\Resources\CollaborationRequests\Schemas\CollaborationRequestInfolist;
 use App\Filament\Resources\CollaborationRequests\Tables\CollaborationRequestsTable;
 use App\Models\CollaborationRequest;
 use BackedEnum;
@@ -43,6 +44,11 @@ class CollaborationRequestResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return CollaborationRequestForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return CollaborationRequestInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
