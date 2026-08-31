@@ -274,7 +274,7 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md"
                     href="{{ url('/') }}">Tentang Kami</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md"
-                    href="{{ url('/program') }}">Program</a>
+                    href="{{ url('/program') }}">Program</a><a class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md" href="{{ url('/berita') }}">Berita</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md"
                     href="{{ url('/kabar') }}">Kabar</a>
             </div>

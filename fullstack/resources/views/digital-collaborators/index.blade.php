@@ -155,6 +155,8 @@
                     class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md"
                     href="{{ url('/kabar') }}">Kabar</a><a
                     class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-3 py-2 font-body-md text-body-md"
+                    href="{{ url('/berita') }}">Berita</a><a
+                    class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
                     href="{{ url('/karir') }}">Karir</a><a
                     class="text-primary font-semibold border-b-2 border-primary pb-1 px-3 py-2 font-body-md text-body-md"
                     href="{{ url('/digital-collaborators') }}">Digital Collaborators</a></div>
