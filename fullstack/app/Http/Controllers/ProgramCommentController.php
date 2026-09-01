@@ -6,20 +6,12 @@ use App\Models\Campaign;
 use App\Models\CampaignComment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ProgramCommentController extends Controller
 {
     /**
-     * Slug program di halaman /program yang dipetakan ke campaign di database.
-     */
-    private const PROGRAM_SLUG_MAP = [
-        'berbagi-al-quran' => 'sedekah-quran-sarana-ibadah-pelosok',
-    ];
-
-    /**
-     * Daftar komentar terpublikasi untuk satu program.
-     * GET /program/comments?program={slug}
+     * Daftar komentar terpublikasi untuk satu campaign.
+     * GET /program/comments?program={campaign_slug}
      */
     public function index(Request $request): JsonResponse
     {
@@ -27,9 +19,9 @@ class ProgramCommentController extends Controller
             'program' => 'required|string|max:191',
         ]);
 
-        $campaignId = $this->resolveCampaignId($validated['program']);
+        $campaign = Campaign::where('slug', $validated['program'])->first();
 
-        if ($campaignId === null) {
+        if (!$campaign) {
             return response()->json([
                 'program' => $validated['program'],
                 'total' => 0,
@@ -37,7 +29,9 @@ class ProgramCommentController extends Controller
             ]);
         }
 
-        $comments = CampaignComment::forCampaign($campaignId)
+        $comments = CampaignComment::where('campaign_id', $campaign->id)
+            ->where('is_approved', true)
+            ->latest()
             ->limit(100)
             ->get(['id', 'name', 'comment', 'created_at']);
 
@@ -72,23 +66,17 @@ class ProgramCommentController extends Controller
             'email.email' => 'Format email tidak valid.',
         ]);
 
-        $campaignId = $this->resolveCampaignId($validated['program']);
+        $campaign = Campaign::where('slug', $validated['program'])->first();
 
-        // Program belum punya campaign terkait: simpan dengan campaign_id pertama
-        // (fallback) agar komentar tetap terekam; mapping bisa dilengkapi nanti.
-        if ($campaignId === null) {
-            $campaignId = Campaign::min('id');
-        }
-
-        if ($campaignId === null) {
+        if (!$campaign) {
             return response()->json([
-                'message' => 'Belum ada program yang tersedia.',
+                'message' => 'Program tidak ditemukan.',
             ], 422);
         }
 
         $comment = CampaignComment::create([
-            'campaign_id' => $campaignId,
-            'user_id' => null,
+            'campaign_id' => $campaign->id,
+            'user_id' => auth()->id(),
             'name' => trim($validated['name']),
             'email' => $validated['email'] ?? null,
             'comment' => trim($validated['content']),
@@ -108,53 +96,20 @@ class ProgramCommentController extends Controller
     }
 
     /**
-     * Jumlah komentar per program (untuk badge di kartu).
+     * Jumlah komentar per campaign (untuk badge di kartu).
      * GET /program/comments/counts
      */
     public function counts(): JsonResponse
     {
-        // Kembalikan per slug kartu program (bukan per campaign),
-        // supaya badge langsung cocok dengan data-program di halaman.
-        $slugToCampaign = collect(self::PROGRAM_SLUG_MAP);
-        $fallback = Campaign::min('id');
-
-        $rows = DB::table('campaign_comments')
-            ->selectRaw('campaign_id, count(*) as total')
-            ->where('is_approved', true)
-            ->groupBy('campaign_id')
-            ->pluck('total', 'campaign_id');
+        $campaigns = Campaign::where('status', 'active')
+            ->withCount(['comments' => fn ($q) => $q->where('is_approved', true)])
+            ->get(['id', 'slug']);
 
         $counts = [];
-        foreach ($slugToCampaign as $cardSlug => $campaignSlug) {
-            $campaignId = Campaign::where('slug', $campaignSlug)->value('id');
-            $counts[$cardSlug] = $campaignId ? (int) ($rows[$campaignId] ?? 0) : 0;
-        }
-        // Program kartu lain (belum dipetakan) tampil 0
-        $cardSlugs = [
-            'berbagi-sembako', 'sarana-berbagi-fidyah', 'sarana-berbagi-karpet', 'yasabi-berani',
-            'sedekah-daging', 'sarana-kafarat', 'kado-guru-ngaji', 'berdaya', 'juragan',
-            'sarana-membangun-masjid', 'sarana-peduli-bencana', 'subuh-berkah', 'sarana-sedekah',
-            'sarana-sehat', 'sarana-borong-jajanan', 'senin-kamis-berbagi', 'sarana-wakaf-air-sumur',
-            'sarana-air-bersih',
-        ];
-        foreach ($cardSlugs as $slug) {
-            $counts[$slug] = $counts[$slug] ?? 0;
+        foreach ($campaigns as $campaign) {
+            $counts[$campaign->slug] = $campaign->comments_count;
         }
 
         return response()->json(['counts' => $counts]);
-    }
-
-    /**
-     * Resolve slug kartu program -> campaign id (null jika tidak ditemukan).
-     */
-    private function resolveCampaignId(string $cardSlug): ?int
-    {
-        $campaignSlug = self::PROGRAM_SLUG_MAP[$cardSlug] ?? null;
-
-        if ($campaignSlug === null) {
-            return null;
-        }
-
-        return Campaign::where('slug', $campaignSlug)->value('id');
     }
 }

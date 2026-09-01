@@ -10,6 +10,11 @@ class RegistrationResponse implements RegistrationResponseContract
 {
     public function toResponse($request): RedirectResponse|Redirector
     {
-        return redirect()->intended(url('/berbagi'));
+        $user = auth()->user();
+        if ($user && $user->canAccessAdminPanel()) {
+            return redirect()->intended(url('/berbagi'));
+        }
+
+        return redirect()->intended(url('/'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles;
@@ -50,13 +51,38 @@ class User extends Authenticatable
         ];
     }
 
-     public function canAccessPanel(Panel $panel): bool
+    /**
+     * Mengatur hak akses ke Filament Panel.
+     * - Panel 'admin' (/berbagi): Hanya super_admin, admin, dan volunteer.
+     * - Panel 'auth' (/auth): Terbuka untuk umum/login.
+     */
+    public function canAccessPanel(Panel $panel): bool
     {
-        // Cuma role staf (super_admin/admin/volunteer) yang boleh masuk
-        // panel /berbagi. Donatur register lewat /auth tapi nggak
-        // dikasih role apa pun, jadi otomatis ketolak di sini —
-        // mereka tetap bisa donasi & login di frontend seperti biasa.
+        if ($panel->getId() === 'admin') {
+            return $this->hasAnyRole(['super_admin', 'admin', 'volunteer']);
+        }
+
+        return true;
+    }
+
+    public function canAccessAdminPanel(): bool
+    {
         return $this->hasAnyRole(['super_admin', 'admin', 'volunteer']);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('super_admin');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function isVolunteer(): bool
+    {
+        return $this->hasRole('volunteer');
     }
 
     public function donations(): HasMany

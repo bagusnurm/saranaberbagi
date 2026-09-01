@@ -21,4 +21,9 @@ class CampaignComment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeForCampaign($query, int $campaignId)
+    {
+        return $query->where('campaign_id', $campaignId)->where('is_approved', true)->latest();
+    }
 }

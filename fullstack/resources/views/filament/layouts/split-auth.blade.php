@@ -30,7 +30,7 @@
                     {{ __('Satu langkah kecil darimu, berarti besar bagi mereka yang membutuhkan.') }}
                 </h2>
                 <p class="fi-split-auth-subheading">
-                    {{ __('Gabung sebagai relawan atau donatur di SaranaBerbagi, dan jadi bagian dari campaign yang sedang berjalan.') }}
+                    {{ __('Bergabunglah bersama SaranaBerbagi dan jadilah bagian dari gerakan kebaikan yang sedang berjalan.') }}
                 </p>
             </div>
 
@@ -41,8 +41,16 @@
 
         {{-- Kolom kanan: form Login / Register, dibungkus card --}}
         <div class="fi-split-auth-panel">
-            <div class="fi-split-auth-card">
-                {{ $slot }}
+            <div class="fi-split-auth-panel-inner">
+                {{-- Tombol Kembali ke Beranda --}}
+                <a href="{{ url('/') }}" class="fi-split-auth-back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                    <span>Kembali ke Beranda</span>
+                </a>
+
+                <div class="fi-split-auth-card">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
 
@@ -144,6 +152,30 @@
             justify-content: center;
             padding: 2rem 1.5rem;
             background: rgb(249 250 251);
+        }
+
+        .fi-split-auth-panel-inner {
+            width: 100%;
+            max-width: 26rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .fi-split-auth-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgb(107 114 128);
+            text-decoration: none;
+            transition: color 0.15s ease;
+            width: fit-content;
+        }
+
+        .fi-split-auth-back-link:hover {
+            color: rgb(13 148 136);
         }
 
         .dark .fi-split-auth-panel {

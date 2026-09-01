@@ -29,54 +29,96 @@ class BeritaSeeder extends Seeder
         $tagKomunitas = Tag::firstOrCreate(['slug' => 'berita-komunitas'], ['name' => 'Berita Komunitas']);
         $tagPangan = Tag::firstOrCreate(['slug' => 'ketahanan-pangan'], ['name' => 'Ketahanan Pangan']);
 
-        // ===== KABAR TERBARI (type: news) =====
+        // ===== KABAR TERBARU / BERITA KEGIATAN (type: news) =====
         $newsItems = [
+            [
+                'category' => $catKisah,
+                'tags' => [$tagKomunitas],
+                'title' => 'Penyaluran Hewan Qurban Idul Adha Hadirkan Kebahagiaan untuk Masyarakat Pelosok',
+                'date' => now()->subDays(1),
+                'thumbnail' => 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&auto=format&fit=crop&q=80',
+                'content' => <<<'HTML'
+<p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed"><strong>SARANA BERBAGI</strong> – Idul Adha selalu menjadi momen penuh haru dan kebahagiaan bagi umat Muslim di seluruh dunia. Di balik gema takbir yang berkumandang, ada jutaan saudara kita yang menanti hadirnya keberkahan melalui daging qurban. Tahun ini, Yayasan Sarana Berbagi bersama Rumah Tahfidz Annaba kembali menyalurkan amanah qurban kepada masyarakat yang membutuhkan hingga pelosok desa.</p>
+<h2 class="font-h2 text-h2 mt-12 mb-6">Menembus Pelosok Demi Senyuman Umat</h2>
+<p class="mb-6">Distribusi daging qurban difokuskan ke wilayah-wilayah pedesaan terpencil yang jarang tersentuh distribusi qurban perkotaan. Warga menyambut kedatangan tim relawan dengan penuh antusias dan rasa syukur.</p>
+<p class="mb-8">"Bagi kami, makan daging sapi adalah hal yang sangat langka. Terima kasih kepada para donatur Sarana Berbagi yang telah mengingat kami di pelosok," ungkap salah seorang warga penerima manfaat.</p>
+<blockquote class="border-l-4 border-primary pl-6 py-3 my-8 bg-surface-container-low/50 rounded-r-xl"><p class="font-h3 text-h3 text-primary italic mb-1">"Setiap helai bulu hewan qurban adalah kebaikan, dan setiap senyuman penerima manfaat adalah doa keberkahan bagi para donatur."</p></blockquote>
+<h2 class="font-h2 text-h2 mt-12 mb-6">Amanah dan Transparansi Penyaluran</h2>
+<p class="">Yayasan Sarana Berbagi memastikan setiap proses pemotongan, penimbangan, hingga pendistribusian dilakukan secara higienis, tepat sasaran, dan terdokumentasi rapi demi menjaga amanah para pekurban.</p>
+HTML,
+            ],
+            [
+                'category' => $catKisah,
+                'tags' => [$tagKomunitas, $tagPangan],
+                'title' => 'Jum\'at Bahagia di Masjid: Sedekah Rp10 Ribu Hadirkan Senyum Anak Yatim dan Dukung UMKM Lokal',
+                'date' => now()->subDays(3),
+                'thumbnail' => 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&auto=format&fit=crop&q=80',
+                'content' => <<<'HTML'
+<p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed"><strong>SARANA BERBAGI</strong> – Suasana selepas shalat Jum'at di salah satu masjid wilayah Bandung tampak berbeda. Di sudut halaman masjid, beberapa anak kecil terlihat duduk rapi sambil sesekali menoleh ke arah relawan yang sedang menyiapkan paket makanan. Wajah mereka penuh harap, seolah ada kebahagiaan kecil yang sudah ditunggu sejak pagi. Bukan tanpa alasan, setiap hari Jum'at program Sedekah Makan Berkah rutin diselenggarakan.</p>
+<h2 class="font-h2 text-h2 mt-12 mb-6">Memberdayakan Warung dan UMKM Lokal</h2>
+<p class="mb-6">Program ini tidak hanya membagikan makanan bernutrisi kepada anak-anak yatim dan jamaah dhuafa, tetapi juga memborong paket makanan dari warung-warung makan kecil milik pedagang lokal di sekitar masjid.</p>
+<p class="mb-8">Dengan cara ini, sedekah dari donatur menghasilkan dua dampak sekaligus: membahagiakan penerima makanan dan menghidupkan perekonomian pedagang kecil.</p>
+HTML,
+            ],
+            [
+                'category' => $catEdukasi,
+                'tags' => [$tagKomunitas],
+                'title' => 'Di Balik Atap yang Terbuka, Cahaya Hafiz Qur\'an Terus Menyala di Bukit Cimenyan',
+                'date' => now()->subDays(5),
+                'thumbnail' => 'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&auto=format&fit=crop&q=80',
+                'content' => <<<'HTML'
+<p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed"><strong>SARANA BERBAGI</strong> – Di ketinggian perbukitan Cimenyan, tepatnya di Desa Mandalamekar, berdiri sebuah bangunan sederhana yang menyimpan energi luar biasa. Madrasah Al-Furqon Mandalamekar, sebuah tempat menimba ilmu yang jauh dari kata mewah, kini menjadi pusat perjuangan bagi puluhan generasi muda muslim untuk menghafal bait-bait suci Al-Qur'an. Kondisi bangunan madrasah ini jauh dari kata sempurna, namun semangat para santri tak pernah padam.</p>
+<h2 class="font-h2 text-h2 mt-12 mb-6">Penyaluran Mushaf Al-Qur'an dan Iqro</h2>
+<p class="mb-6">Tim Sarana Berbagi menyalurkan mushaf Al-Qur'an baru, buku tajwid, serta karpet sajadah untuk menggantikan alas belajar santri yang sudah usang dan lapuk.</p>
+<p class="">Dukungan sarana belajar yang layak ini diharapkan mampu memicu motivasi anak-anak desa untuk terus mendalami Al-Qur'an hingga menjadi generasi hafiz yang berakhlak mulia.</p>
+HTML,
+            ],
+            [
+                'category' => $catFilantropi,
+                'tags' => [$tagFilantropi, $tagRelawan],
+                'title' => 'Menembus Lelah, Mengukir Senyum: Strategi Filantropi Berbasis Komunitas di Wilayah Bandung Selatan',
+                'date' => now()->subDays(8),
+                'thumbnail' => 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80',
+                'content' => <<<'HTML'
+<p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed"><strong>SARANA BERBAGI</strong> – Wilayah Bandung Selatan memiliki tantangan geografis tersendiri dalam pendistribusian program sosial kemanusiaan. Melalui pendekatan filantropi berbasis komunitas, Sarana Berbagi melibatkan tokoh masyarakat, pemuda karang taruna, dan pengurus RT/RW dalam pemetaan mustahik yang paling membutuhkan.</p>
+<h2 class="font-h2 text-h2 mt-12 mb-6">Efektivitas Pendekatan Akar Rumput</h2>
+<p class="mb-6">Dengan data yang akurat dari warga setempat, potensi salah sasaran bantuan dapat diminimalisir hingga mendekati nol. Relawan lokal juga berperan aktif dalam memantau keberlanjutan dampak bantuan yang diberikan.</p>
+HTML,
+            ],
             [
                 'category' => $catEdukasi,
                 'tags' => [$tagKomunitas],
                 'title' => 'Perpustakaan Keliling Tiba di Desa Harapan',
-                'date' => now()->subDays(3),
-                'thumbnail' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCtWbu662_2iNprm3alF0kRYaVnj_AcLjFaNMAdEanEt2kEPtK10neEJan1lIlnwR0Eypa7X933lr30xQDo2kPIpvy5vbHdxhWVz_WUmZ5V0ZOhrhhW6CsZDNtTT2ytO-ejtCGhSfOm_pDszAGOBLyGxmF0uUg_vsbRpn1pRFdEPbUVSh3_s2HCVasEhtvOHnfA53Oaqh9HYqw5Jm-_DVNyYrKEdax3YR76z9irRp8-OLMANMDmpf_Hjg',
+                'date' => now()->subDays(10),
+                'thumbnail' => 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&auto=format&fit=crop&q=80',
                 'content' => <<<'HTML'
 <p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed">Program perpustakaan keliling Sarana Berbagi kembali menyapa anak-anak di pelosok desa. Kali ini, Desa Harapan menjadi tujuan utama dalam misi menyebarkan literasi dan pengetahuan.</p>
 <h2 class="font-h2 text-h2 mt-12 mb-6">Misi Berbagi Pengetahuan</h2>
 <p class="mb-6">Lebih dari 500 buku baru berhasil didistribusikan dalam program ini. Tidak hanya meminjamkan buku, relawan kami juga mengadakan sesi mendongeng dan aktivitas kreatif untuk membangun minat baca anak-anak.</p>
-<p class="mb-8">Antusiasme terlihat dari wajah-wajah ceria mereka. Banyak yang bahkan meminta agar program ini dapat datang kembali bulan depan.</p>
-<blockquote class="border-l-4 border-primary-container pl-6 py-2 my-10 bg-surface-container-low/50 rounded-r-lg"><p class="font-h3 text-h3 text-primary-container italic mb-2">"Buku adalah jendela dunia. Melalui program ini, kami berharap dapat membuka wawasan lebih luas bagi anak-anak desa."</p></blockquote>
-<h2 class="font-h2 text-h2 mt-12 mb-6">Dampak yang Dirasakan</h2>
-<p class="mb-6">Sejak diluncurkan tiga tahun lalu, program perpustakaan keliling telah mengunjungi lebih dari 50 desa dan menjangkau lebih dari 10.000 anak di seluruh Indonesia.</p>
-<p class="">Dukungan donatur menjadi kunci keberlangsungan program ini. Setiap kontribusi yang Anda berikan membantu kami membawa lebih banyak buku dan pengetahuan ke daerah-daerah yang membutuhkan.</p>
 HTML,
             ],
             [
                 'category' => $catKesehatan,
                 'tags' => [$tagKomunitas],
                 'title' => 'Klinik Berjalan Melayani 500 Warga Lansia',
-                'date' => now()->subDays(7),
-                'thumbnail' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuB8JJYQSs4hSDhny6bWDq6C8tL3CNgX5Vuo1ax6SXD7haKd-UsCujEce-pTHKwoo6VkHNvJXtOqp2kzfKzKKC0AwuCXUPyvkA4DcGVjpaS0_bnQPztiHVcvJR41noQ0TBjThu9b9ooLtoZnPcACgbqsz99OPlt4V81lqJa-G2jxfISH0EZeipYnJkwiAg7OOAKDN8eK-KzpCv4RI_RHxQS9RyOUXjrLgmWWTTK4P7rlX-g1YcQgz8s3qA',
+                'date' => now()->subDays(15),
+                'thumbnail' => 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&auto=format&fit=crop&q=80',
                 'content' => <<<'HTML'
 <p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed">Program klinik berjalan Sarana Berbagi kembali menunjukkan komitmen kami dalam meningkatkan akses kesehatan bagi masyarakat di daerah terpencil, khususnya untuk kelompok lansia.</p>
 <h2 class="font-h2 text-h2 mt-12 mb-6">Pelayanan yang Komprehensif</h2>
-<p class="mb-6">Tim medis kami terdiri dari 5 dokter umum, 10 perawat, dan 2 apoteker yang siap memberikan pelayanan kesehatan lengkap mulai dari pemeriksaan umum, pengukuran tekanan darah, hingga penyediaan obat-obatan esensial.</p>
-<p class="mb-8">Lebih dari 500 warga lansia telah mendapatkan manfaat dari program bulan ini. Sebagian besar mengalami masalah kesehatan yang umum dialami lansia seperti hipertensi dan diabetes.</p>
-<h2 class="font-h2 text-h2 mt-12 mb-6">Keberlanjutan Program</h2>
-<p class="">Program klinik berjalan akan terus digelar setiap bulan di berbagai desa. Kami berkomitmen untuk menjangkau lebih banyak lansia yang membutuhkan akses kesehatan yang layak.</p>
+<p class="mb-6">Tim medis kami terdiri dari 5 dokter umum, 10 perawat, dan 2 apoteker yang siap memberikan pelayanan kesehatan lengkap mulai dari pemeriksaan umum hingga penyediaan obat-obatan esensial.</p>
 HTML,
             ],
             [
                 'category' => $catBencana,
                 'tags' => [$tagKomunitas],
                 'title' => 'Distribusi Air Bersih Pasca Gempa',
-                'date' => now()->subDays(14),
-                'thumbnail' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAuNn8SWz1-gb07ckiocA_tz4YyBPpeSOB0GqDB6zpekTROOVs2bQyPVfSG3Q83l7bR_9EaI520iHc20SCs_7r-PozeQuw2SuRHS5KKUrAxW8Lr3jfKeog6_ABuSg-CsQG51Px9e-izEL6jfRGys928Hi7Vtp5xxsjim09TgWk-rLUNNRyLbntLf1UR65QpcMtYUxXKxF4ul1kiVpNLNkaPhW5LVjTBo-Ww7TNYDU_2CBZuOQKdMJifvA',
+                'date' => now()->subDays(20),
+                'thumbnail' => 'https://images.unsplash.com/photo-1541971875076-8f970d573be6?w=800&auto=format&fit=crop&q=80',
                 'content' => <<<'HTML'
 <p class="lead text-xl text-on-surface-variant mb-8 leading-relaxed">Bencana gempa bumi yang baru saja terjadi telah meninggalkan dampak signifikan bagi masyarakat. Akses air bersih menjadi salah satu kebutuhan paling mendesak yang harus segera dipenuhi.</p>
 <h2 class="font-h2 text-h2 mt-12 mb-6">Respons Cepat Tim Darurat</h2>
-<p class="mb-6">Dalam waktu kurang dari 24 jam, tim tanggap darurat Sarana Berbagi telah berada di lokasi dan mulai mendistribusikan air bersih ke titik-titik pengungsian. Lima titik distribusi didirikan untuk memastikan cakupan yang merata.</p>
-<p class="mb-8">Setiap titik distribusi mampu melayani hingga 200 kepala keluarga per hari dengan kebutuhan air bersih yang layak konsumsi.</p>
-<blockquote class="border-l-4 border-primary-container pl-6 py-2 my-10 bg-surface-container-low/50 rounded-r-lg"><p class="font-h3 text-h3 text-primary-container italic mb-2">"Air bersih adalah hak setiap manusia. Dalam situasi darurat seperti ini, kami hadir untuk memastikan kebutuhan dasar ini terpenuhi."</p></blockquote>
-<h2 class="font-h2 text-h2 mt-12 mb-6">Fokus pada Kelompok Rentan</h2>
-<p class="">Anak-anak dan lansia menjadi prioritas utama dalam distribusi ini. Tim kami juga menyediakan edukasi tentang pengolahan air darurat untuk mencegah penyakit pasca bencana.</p>
+<p class="mb-6">Dalam waktu kurang dari 24 jam, tim tanggap darurat Sarana Berbagi telah berada di lokasi dan mulai mendistribusikan air bersih ke titik-titik pengungsian.</p>
 HTML,
             ],
         ];

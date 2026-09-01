@@ -2,60 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContentCategory;
 use App\Models\Post;
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class BeritaController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Halaman /berita — Menampilkan warta berita & kabar terbaru (Post type = 'news').
+     */
+    public function index(Request $request): View
     {
         $search = $request->query('q');
+        $selectedCategory = $request->query('kategori');
 
-        // Kabar Terbaru: post bertipe news
-        $kabar = Post::with(['category', 'tags', 'author'])
+        $query = Post::with(['category', 'tags', 'author'])
             ->where('type', 'news')
             ->where('status', 'published')
-            ->when($search, fn ($q) => $q->where(fn ($w) => $w
-                ->where('title', 'like', "%{$search}%")
-                ->orWhere('content', 'like', "%{$search}%")))
-            ->orderByDesc('published_at')
-            ->get();
+            ->orderByDesc('published_at');
 
-        // Blog & Edukasi: post bertipe blog
-        $blog = Post::with(['category', 'tags', 'author'])
-            ->where('type', 'blog')
+        if ($selectedCategory) {
+            $query->whereHas('category', fn ($q) => $q->where('slug', $selectedCategory));
+        }
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        $allNews = $query->get();
+        $featuredNews = $allNews->first();
+        $newsList = $allNews->skip(1)->values();
+
+        // Kategori yang memiliki post bertipe news
+        $categories = ContentCategory::whereHas('posts', fn ($q) => $q
+            ->where('type', 'news')
             ->where('status', 'published')
-            ->when($search, fn ($q) => $q->where(fn ($w) => $w
-                ->where('title', 'like', "%{$search}%")
-                ->orWhere('content', 'like', "%{$search}%")))
-            ->orderByDesc('published_at')
-            ->get();
+        )->orderBy('name')->get();
 
-        $featured = $blog->first();
-        $blogLainnya = $blog->skip(1)->values();
-
-        // Tag pills unik dari semua post
-        $tagPills = Tag::whereHas('posts', fn ($q) => $q->whereIn('type', ['news', 'blog'])
-            ->where('status', 'published'))
-            ->orderBy('name')
-            ->get();
-
-        // Data popup detail per post (sama pola dengan popup di halaman Kabar)
-        $popupData = $kabar->concat($blog)
-            ->mapWithKeys(fn ($post) => [$post->id => $this->buildPopup($post)])
-            ->all();
-
-        return view('berita', compact('kabar', 'featured', 'blogLainnya', 'tagPills', 'search', 'popupData'));
+        return view('berita.index', compact('allNews', 'featuredNews', 'newsList', 'categories', 'selectedCategory', 'search'));
     }
 
-    private function buildPopup(Post $post): array
+    /**
+     * Halaman /berita/{slug} — Detail spesifik berita penyaluran / warta kegiatan.
+     */
+    public function show(string $slug): View
     {
-        $author = $post->author?->name ?? 'Tim Redaksi';
+        $post = Post::with(['category', 'tags', 'author'])
+            ->where('type', 'news')
+            ->where('status', 'published')
+            ->where('slug', $slug)
+            ->firstOrFail();
 
-        $html = view('berita._popup', ['post' => $post, 'author' => $author])->render();
+        $otherPosts = Post::with(['category', 'author'])
+            ->where('type', 'news')
+            ->where('status', 'published')
+            ->where('id', '!=', $post->id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
 
-        return ['html' => $html];
+        return view('berita.show', compact('post', 'otherPosts'));
     }
 }

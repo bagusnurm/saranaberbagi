@@ -41,11 +41,15 @@ class Register extends BaseRegister
 
     protected function handleRegistration(array $data): Model
     {
-        return User::create([
+        // User biasa — tanpa role. Hanya super_admin/admin/volunteer yang punya role
+        // dan di-assign lewat dashboard panel oleh admin.
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
+
+        return $user;
     }
 
     protected function getNameFormComponent(): Component

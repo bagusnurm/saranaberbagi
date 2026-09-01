@@ -3,16 +3,19 @@
 use App\Http\Controllers\DonasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KabarController;
+use App\Http\Controllers\KarirController;
+use App\Http\Controllers\KolaborasiController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ProgramCommentController;
 
 // Halaman publik
 Route::get('/', function () {
-    return view('app');
+    return view('beranda.index');
 });
 
-Route::get('/program', function () {
-    return view('program');
-});
+Route::get('/program', [ProgramController::class, 'index'])->name('program.index');
+Route::get('/program/{slug}', [ProgramController::class, 'show'])->name('program.show');
 
 // Komentar program (dinamis, tersimpan di tabel campaign_comments)
 Route::get('/program/comments/counts', [ProgramCommentController::class, 'counts'])
@@ -23,20 +26,23 @@ Route::post('/program/comments', [ProgramCommentController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('program.comments.store');
 
-Route::get('/kabar', function () {
-    return view('kabar');
-});
+// Kabar (Blog, Artikel & Inspirasi - type: blog)
+Route::get('/kabar', [KabarController::class, 'index'])->name('kabar.index');
+Route::get('/kabar/{slug}', [KabarController::class, 'show'])->name('kabar.show');
 
-// Berita: Kabar Terbaru + Blog & Edukasi
+// Berita (Warta Berita & Kabar Terbaru - type: news)
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
-Route::get('/karir', function () {
-    return view('karir.index');
-});
+// Karir & Lowongan
+Route::get('/karir', [KarirController::class, 'index'])->name('karir.index');
+Route::get('/karir/{slug}', [KarirController::class, 'show'])->name('karir.show');
+Route::post('/karir/apply', [KarirController::class, 'apply'])->name('karir.apply');
 
-Route::get('/digital-collaborators', function () {
-    return view('digital-collaborators.index');
-});
+// Kolaborasi & Pengajuan Bantuan (Platform Tumbuh Bersama)
+Route::get('/kolaborasi', [KolaborasiController::class, 'index'])->name('kolaborasi.index');
+Route::post('/kolaborasi/ajukan', [KolaborasiController::class, 'store'])->name('kolaborasi.store');
+Route::redirect('/digital-collaborators', '/kolaborasi', 301);
 
 // Alur donasi
 Route::get('/donasi', [DonasiController::class, 'step1'])->name('donasi.step1');
@@ -44,7 +50,15 @@ Route::post('/donasi/step2', [DonasiController::class, 'step2'])->name('donasi.s
 Route::post('/donasi/step3', [DonasiController::class, 'step3'])->name('donasi.step3');
 Route::post('/donasi/konfirmasi', [DonasiController::class, 'konfirmasi'])->name('donasi.konfirmasi');
 
+// Auth logout route untuk frontend
+Route::post('/logout', function (\Illuminate\Http\Request $request) {
+    \Illuminate\Support\Facades\Auth::guard('web')->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
+
 // Catch-all untuk route yang tidak dikenal -> home
 Route::get('/{any}', function () {
-    return view('app');
+    return view('beranda.index');
 })->where('any', '.*');

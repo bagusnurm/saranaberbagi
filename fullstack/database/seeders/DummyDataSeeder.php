@@ -423,5 +423,122 @@ class DummyDataSeeder extends Seeder
                 'created_at' => now()->subDays(4),
             ]
         );
+
+        // 9. Permohonan Bantuan (AidRequests) - Sample Data untuk Testing
+        // A. Status: Pending (Menunggu Verifikasi)
+        AidRequest::firstOrCreate(
+            ['nik' => '3204285501900002'],
+            [
+                'campaign_id' => $campaign2->id,
+                'applicant_name' => 'Siti Rahmawati',
+                'nik' => '3204285501900002',
+                'kk_number' => '3204281203150001',
+                'birthdate' => '1990-05-15',
+                'gender' => 'female',
+                'occupation' => 'Ibu Rumah Tangga',
+                'marital_status' => 'menikah',
+                'is_mualaf' => false,
+                'phone' => '081234567890',
+                'province' => 'Jawa Barat',
+                'city' => 'Kabupaten Bandung',
+                'village' => 'Bojongsoang',
+                'address' => 'Kp. Cijagra RT 03 RW 05, Desa Bojongsoang',
+                'fund_needed' => 15000000.00,
+                'bank_name' => 'Bank Syariah Indonesia (BSI)',
+                'bank_account_number' => '7198234561',
+                'bank_account_holder' => 'Siti Rahmawati',
+                'description' => 'Pengajuan bantuan tambahan untuk biaya tindakan kateterisasi jantung dan obat pendukung ananda Rayyan yang belum tercover BPJS secara penuh.',
+                'status' => 'pending',
+                'admin_note' => null,
+                'created_at' => now()->subHours(6),
+            ]
+        );
+
+        // B. Status: Verified (Terverifikasi & Siap Disalurkan)
+        AidRequest::firstOrCreate(
+            ['nik' => '3204111204650003'],
+            [
+                'campaign_id' => $campaign3->id,
+                'applicant_name' => 'Ujang Supriatna',
+                'nik' => '3204111204650003',
+                'kk_number' => '3204110908120004',
+                'birthdate' => '1965-04-12',
+                'gender' => 'male',
+                'occupation' => 'Buruh Tani Lepas',
+                'marital_status' => 'cerai_mati',
+                'is_mualaf' => false,
+                'phone' => '085712349988',
+                'province' => 'Jawa Barat',
+                'city' => 'Kabupaten Bandung Barat',
+                'village' => 'Cililin',
+                'address' => 'Kp. Babakan RT 02 RW 01, Desa Cililin',
+                'fund_needed' => 2500000.00,
+                'bank_name' => 'Bank Rakyat Indonesia (BRI)',
+                'bank_account_number' => '012301098765501',
+                'bank_account_holder' => 'Ujang Supriatna',
+                'description' => 'Permohonan bantuan paket pangan dan sembako bulanan untuk lansia dhuafa yang tinggal sebatang kara dan mengalami keterbatasan mobilitas.',
+                'status' => 'verified',
+                'admin_note' => 'Hasil survei tim relawan: kondisi layak menerima bantuan rutin sembako dan suplemen lansia.',
+                'created_at' => now()->subDays(2),
+            ]
+        );
+
+        // C. Status: Disbursed (Telah Disalurkan)
+        AidRequest::firstOrCreate(
+            ['nik' => '3204151008800005'],
+            [
+                'campaign_id' => $campaign1->id,
+                'applicant_name' => 'Ust. Hidayatulloh',
+                'nik' => '3204151008800005',
+                'kk_number' => '3204152002100002',
+                'birthdate' => '1980-08-10',
+                'gender' => 'male',
+                'occupation' => 'Guru Ngaji / Pengurus Mushola',
+                'marital_status' => 'menikah',
+                'is_mualaf' => false,
+                'phone' => '081987654321',
+                'province' => 'Jawa Barat',
+                'city' => 'Kabupaten Garut',
+                'village' => 'Singajaya',
+                'address' => 'Mushola Al-Ikhlas Kp. Sukamaju RT 04 RW 02',
+                'fund_needed' => 5000000.00,
+                'bank_name' => 'Bank Mandiri',
+                'bank_account_number' => '1310019283741',
+                'bank_account_holder' => 'Mushola Al-Ikhlas (Hidayatulloh)',
+                'description' => 'Pengajuan pengadaan 50 mushaf Al-Qur\'an dan karpet sarana ibadah untuk santri dhuafa di pelosok.',
+                'status' => 'disbursed',
+                'admin_note' => 'Telah disalurkan langsung 50 mushaf Al-Qur\'an dan 2 rol karpet pada tanggal 28 Agustus 2026.',
+                'created_at' => now()->subDays(5),
+            ]
+        );
+
+        // D. Status: Rejected (Ditolak)
+        AidRequest::firstOrCreate(
+            ['nik' => '3204090101950008'],
+            [
+                'campaign_id' => null,
+                'applicant_name' => 'Bambang Prasetyo',
+                'nik' => '3204090101950008',
+                'kk_number' => '3204092506180009',
+                'birthdate' => '1995-01-01',
+                'gender' => 'male',
+                'occupation' => 'Wiraswasta',
+                'marital_status' => 'belum_menikah',
+                'is_mualaf' => false,
+                'phone' => '081399887766',
+                'province' => 'DKI Jakarta',
+                'city' => 'Jakarta Selatan',
+                'village' => 'Tebet',
+                'address' => 'Jl. Tebet Raya No. 45',
+                'fund_needed' => 50000000.00,
+                'bank_name' => 'Bank Central Asia (BCA)',
+                'bank_account_number' => '8720192837',
+                'bank_account_holder' => 'Bambang Prasetyo',
+                'description' => 'Pengajuan modal pinjaman usaha komersial.',
+                'status' => 'rejected',
+                'admin_note' => 'Program Sarana Berbagi diperuntukkan bagi bantuan kemanusiaan dan asnaf penerima manfaat, bukan untuk modal usaha komersial/pinjaman.',
+                'created_at' => now()->subDays(4),
+            ]
+        );
     }
 }
