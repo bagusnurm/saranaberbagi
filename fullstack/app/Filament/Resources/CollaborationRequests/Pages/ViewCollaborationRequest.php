@@ -91,21 +91,22 @@ class ViewCollaborationRequest extends ViewRecord
                 ->label('Unduh Dokumen')
                 ->icon('heroicon-o-arrow-down-tray')
                 ->color('gray')
-                ->visible(fn (CollaborationRequest $record): bool => !empty($record->attachment))
-                ->url(fn (CollaborationRequest $record): string => asset('storage/' . $record->attachment))
+                ->visible(fn (CollaborationRequest $record): bool => ! empty($record->attachment))
+                ->url(fn (CollaborationRequest $record): string => asset('storage/'.$record->attachment))
                 ->openUrlInNewTab(),
 
             Action::make('whatsapp')
                 ->label('Hubungi WhatsApp')
                 ->icon('heroicon-o-chat-bubble-left-ellipsis')
                 ->color('success')
-                ->visible(fn (CollaborationRequest $record): bool => !empty($record->phone))
+                ->visible(fn (CollaborationRequest $record): bool => ! empty($record->phone))
                 ->url(function (CollaborationRequest $record): string {
                     $phone = preg_replace('/[^0-9]/', '', $record->phone);
                     if (str_starts_with($phone, '0')) {
-                        $phone = '62' . substr($phone, 1);
+                        $phone = '62'.substr($phone, 1);
                     }
                     $msg = urlencode("Halo Tim {$record->institution_name}, kami dari Tim Kemitraan Sarana Berbagi mengenai proposal kolaborasi ({$record->collaboration_type}) yang diajukan.");
+
                     return "https://wa.me/{$phone}?text={$msg}";
                 })
                 ->openUrlInNewTab(),
@@ -114,9 +115,10 @@ class ViewCollaborationRequest extends ViewRecord
                 ->label('Kirim Email')
                 ->icon('heroicon-o-envelope')
                 ->color('gray')
-                ->visible(fn (CollaborationRequest $record): bool => !empty($record->email))
+                ->visible(fn (CollaborationRequest $record): bool => ! empty($record->email))
                 ->url(function (CollaborationRequest $record): string {
-                    $subject = urlencode("Konfirmasi Pengajuan Kolaborasi - Sarana Berbagi");
+                    $subject = urlencode('Konfirmasi Pengajuan Kolaborasi - Sarana Berbagi');
+
                     return "mailto:{$record->email}?subject={$subject}";
                 })
                 ->openUrlInNewTab(),

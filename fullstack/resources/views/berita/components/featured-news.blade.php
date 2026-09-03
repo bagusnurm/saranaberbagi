@@ -11,7 +11,8 @@
             <div class="lg:col-span-7 relative h-72 lg:h-96 overflow-hidden">
                 <img src="{{ $thumb }}"
                     alt="{{ $featuredNews->title }}"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy">
                 @if ($featuredNews->category)
                     <div class="absolute top-4 left-4 bg-primary text-white font-bold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider shadow">
                         {{ $featuredNews->category->name }}

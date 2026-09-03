@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\JobApplications\Schemas;
 
-use App\Models\JobVacancy;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;

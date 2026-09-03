@@ -75,6 +75,7 @@ class CollaborationRequestsTable
                         ->label('Tandai Sedang Ditinjau')
                         ->icon('heroicon-o-eye')
                         ->color('info')
+                        ->authorize(fn (CollaborationRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (CollaborationRequest $record): bool => $record->status === 'pending')
                         ->action(function (CollaborationRequest $record): void {
                             $record->update(['status' => 'reviewed']);
@@ -90,6 +91,7 @@ class CollaborationRequestsTable
                         ->label('Setujui Kerjasama')
                         ->icon('heroicon-o-check-badge')
                         ->color('success')
+                        ->authorize(fn (CollaborationRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (CollaborationRequest $record): bool => in_array($record->status, ['pending', 'reviewed']))
                         ->schema([
                             Textarea::make('admin_note')
@@ -114,6 +116,7 @@ class CollaborationRequestsTable
                         ->label('Tolak Kerjasama')
                         ->icon('heroicon-o-x-mark')
                         ->color('danger')
+                        ->authorize(fn (CollaborationRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (CollaborationRequest $record): bool => in_array($record->status, ['pending', 'reviewed']))
                         ->schema([
                             Textarea::make('admin_note')
@@ -139,21 +142,22 @@ class CollaborationRequestsTable
                         ->label('Unduh Dokumen Proposal')
                         ->icon('heroicon-o-arrow-down-tray')
                         ->color('gray')
-                        ->visible(fn (CollaborationRequest $record): bool => !empty($record->attachment))
-                        ->url(fn (CollaborationRequest $record): string => asset('storage/' . $record->attachment))
+                        ->visible(fn (CollaborationRequest $record): bool => ! empty($record->attachment))
+                        ->url(fn (CollaborationRequest $record): string => asset('storage/'.$record->attachment))
                         ->openUrlInNewTab(),
 
                     Action::make('whatsapp')
                         ->label('Hubungi WhatsApp PIC')
                         ->icon('heroicon-o-chat-bubble-left-ellipsis')
                         ->color('success')
-                        ->visible(fn (CollaborationRequest $record): bool => !empty($record->phone))
+                        ->visible(fn (CollaborationRequest $record): bool => ! empty($record->phone))
                         ->url(function (CollaborationRequest $record): string {
                             $phone = preg_replace('/[^0-9]/', '', $record->phone);
                             if (str_starts_with($phone, '0')) {
-                                $phone = '62' . substr($phone, 1);
+                                $phone = '62'.substr($phone, 1);
                             }
                             $msg = urlencode("Halo Tim {$record->institution_name}, kami dari Tim Kemitraan Sarana Berbagi mengenai proposal kolaborasi ({$record->collaboration_type}) yang diajukan.");
+
                             return "https://wa.me/{$phone}?text={$msg}";
                         })
                         ->openUrlInNewTab(),
@@ -162,9 +166,10 @@ class CollaborationRequestsTable
                         ->label('Kirim Email')
                         ->icon('heroicon-o-envelope')
                         ->color('gray')
-                        ->visible(fn (CollaborationRequest $record): bool => !empty($record->email))
+                        ->visible(fn (CollaborationRequest $record): bool => ! empty($record->email))
                         ->url(function (CollaborationRequest $record): string {
-                            $subject = urlencode("Konfirmasi Pengajuan Kolaborasi - Sarana Berbagi");
+                            $subject = urlencode('Konfirmasi Pengajuan Kolaborasi - Sarana Berbagi');
+
                             return "mailto:{$record->email}?subject={$subject}";
                         })
                         ->openUrlInNewTab(),

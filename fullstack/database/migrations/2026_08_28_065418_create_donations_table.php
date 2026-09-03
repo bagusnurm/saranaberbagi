@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number')->unique();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); 
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->nullOnDelete();
             $table->foreignId('payment_method_id')->constrained();
             $table->string('donor_name');
@@ -27,6 +27,13 @@ return new class extends Migration
             $table->enum('status', ['pending', 'verified', 'failed', 'expired'])->default('pending');
             $table->foreignId('verified_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
+
+            // PostgreSQL tidak auto-index FK & kolom filter — index eksplisit dibutuhkan untuk performa query
+            $table->index('status');
+            $table->index('campaign_id');
+            $table->index('payment_method_id');
+            $table->index('verified_by');
+            $table->index('user_id');
         });
     }
 

@@ -91,7 +91,7 @@ class KarirController extends Controller
             'email' => trim($validated['email']),
             'phone' => trim($validated['telepon']),
             'cv_file' => $cvPath,
-            'cover_letter' => !empty($validated['pesan']) ? trim($validated['pesan']) : null,
+            'cover_letter' => ! empty($validated['pesan']) ? trim($validated['pesan']) : null,
             'status' => 'pending',
         ]);
 

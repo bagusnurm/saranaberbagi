@@ -12,7 +12,7 @@ class EditAidRequest extends EditRecord
 {
     protected static string $resource = AidRequestResource::class;
 
-     protected function getRedirectUrl(): string
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }

@@ -16,9 +16,9 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class ContentCategoryResource extends Resource
-{   
+{
     use HasPageShield;
-    
+
     protected static ?string $model = ContentCategory::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;

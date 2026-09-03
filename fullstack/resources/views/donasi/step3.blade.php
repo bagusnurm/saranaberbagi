@@ -85,7 +85,7 @@
                             Kembali
                         </a>
                         <button type="submit"
-                            class="flex-1 bg-[#F59E0B] hover:bg-[#D97706] text-white font-label-sm text-sm px-6 py-4 rounded-xl transition-all shadow-md active:scale-95 font-bold flex items-center justify-center gap-2">
+                            class="flex-1 bg-accent hover:bg-accent-hover text-on-accent font-label-sm text-sm px-6 py-4 rounded-xl transition-all shadow-md active:scale-95 font-bold flex items-center justify-center gap-2">
                             <span>Selesaikan Donasi</span>
                             <span class="material-symbols-outlined text-base">check_circle</span>
                         </button>

@@ -80,7 +80,7 @@ class CampaignInfolist
                                 ->label('Persentase Tercapai')
                                 ->formatStateUsing(fn ($record): string => (blank($record->target_amount) || (int) $record->target_amount <= 0)
                                     ? '0%'
-                                    : round(($record->collected_amount / $record->target_amount) * 100) . '%')
+                                    : round(($record->collected_amount / $record->target_amount) * 100).'%')
                                 ->badge()
                                 ->color(fn ($record): string => ($record->target_amount > 0
                                     && ($record->collected_amount / $record->target_amount) >= 1)

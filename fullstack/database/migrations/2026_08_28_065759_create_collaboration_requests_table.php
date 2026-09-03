@@ -22,6 +22,9 @@ return new class extends Migration
             $table->enum('status', ['pending', 'reviewed', 'approved', 'rejected'])->default('pending');
             $table->text('admin_note')->nullable();
             $table->timestamps();
+
+            // PostgreSQL tidak auto-index FK & kolom filter — index eksplisit dibutuhkan untuk performa query
+            $table->index('status');
         });
     }
 

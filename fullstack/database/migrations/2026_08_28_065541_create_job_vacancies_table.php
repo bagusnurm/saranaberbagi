@@ -22,6 +22,9 @@ return new class extends Migration
             $table->date('deadline')->nullable();
             $table->enum('status', ['open', 'closed'])->default('open');
             $table->timestamps();
+
+            // PostgreSQL tidak auto-index FK & kolom filter — index eksplisit dibutuhkan untuk performa query
+            $table->index('status');
         });
     }
 

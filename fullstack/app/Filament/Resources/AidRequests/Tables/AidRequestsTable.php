@@ -77,6 +77,7 @@ class AidRequestsTable
                         ->label('Verifikasi Permohonan')
                         ->icon('heroicon-o-check-circle')
                         ->color('primary')
+                        ->authorize(fn (AidRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (AidRequest $record): bool => $record->status === 'pending')
                         ->schema([
                             Textarea::make('admin_note')
@@ -101,6 +102,7 @@ class AidRequestsTable
                         ->label('Salurkan Bantuan')
                         ->icon('heroicon-o-gift')
                         ->color('success')
+                        ->authorize(fn (AidRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (AidRequest $record): bool => $record->status === 'verified')
                         ->schema([
                             Textarea::make('admin_note')
@@ -126,6 +128,7 @@ class AidRequestsTable
                         ->label('Tolak Permohonan')
                         ->icon('heroicon-o-x-circle')
                         ->color('danger')
+                        ->authorize(fn (AidRequest $record): bool => auth()->user()?->can('update', $record) ?? false)
                         ->visible(fn (AidRequest $record): bool => in_array($record->status, ['pending', 'verified']))
                         ->schema([
                             Textarea::make('admin_note')
@@ -159,6 +162,7 @@ class AidRequestsTable
                             }
                             $program = $record->campaign?->title ?? 'bantuan yang diajukan';
                             $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim Sarana Berbagi mengenai permohonan {$program} yang Anda ajukan.");
+
                             return "https://wa.me/{$phone}?text={$msg}";
                         })
                         ->openUrlInNewTab(),

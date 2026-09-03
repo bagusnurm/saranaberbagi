@@ -42,7 +42,7 @@ class CampaignForm
                 TextInput::make('target_amount')
                     ->label('Target Dana Terkumpul')
                     ->required()
-                    ->numeric() 
+                    ->numeric()
                     ->prefix('Rp')
                     ->default(0),
                 TextInput::make('collected_amount')

@@ -3,14 +3,16 @@
 namespace App\Filament\Resources\Users\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Spatie\Permission\Models\Role;
 
 class UserForm
 {
-   public static function configure(Schema $schema): Schema
+    public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -39,13 +41,30 @@ class UserForm
                                     )
                                     ->maxLength(255),
 
-                                \Filament\Forms\Components\Select::make('roles')
+                                Select::make('roles')
                                     ->label('Peran / Hak Akses (Role)')
-                                    ->relationship('roles', 'name')
+                                    ->relationship(
+                                        name: 'roles',
+                                        titleAttribute: 'name',
+                                        modifyQueryUsing: fn ($query) => auth()->user()?->hasRole('super_admin')
+                                            ? $query
+                                            : $query->where('name', '!=', 'super_admin')
+                                    )
                                     ->multiple()
                                     ->preload()
                                     ->searchable()
-                                    ->columnSpanFull(),
+                                    ->columnSpanFull()
+                                    ->rule(function () {
+                                        return function (string $attribute, $value, \Closure $fail) {
+                                            // Non-super_admin tidak boleh menetapkan role super_admin
+                                            if (! auth()->user()?->hasRole('super_admin')) {
+                                                $superAdminRole = Role::where('name', 'super_admin')->first();
+                                                if ($superAdminRole && is_array($value) && in_array($superAdminRole->id, $value)) {
+                                                    $fail('Hanya super_admin yang dapat menetapkan role super_admin.');
+                                                }
+                                            }
+                                        };
+                                    }),
                             ]),
                     ])
                     ->columnSpanFull(),
@@ -61,14 +80,12 @@ class UserForm
                             ->revealable()
                             ->prefixIcon('heroicon-o-key')
                             ->required(
-                                fn (string $operation): bool =>
-                                    $operation === 'create'
+                                fn (string $operation): bool => $operation === 'create'
                             )
                             ->minLength(8)
                             ->maxLength(255)
                             ->dehydrated(
-                                fn ($state): bool =>
-                                    filled($state)
+                                fn ($state): bool => filled($state)
                             )
                             ->helperText(
                                 'Minimal 8 karakter. Kosongkan saat edit jika tidak ingin mengubah password.'
@@ -82,8 +99,7 @@ class UserForm
                             ->prefixIcon('heroicon-o-shield-check')
                             ->same('password')
                             ->required(
-                                fn (string $operation): bool =>
-                                    $operation === 'create'
+                                fn (string $operation): bool => $operation === 'create'
                             )
                             ->dehydrated(false),
                     ])

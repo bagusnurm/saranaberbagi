@@ -25,6 +25,9 @@ return new class extends Migration
             $table->enum('status', ['draft', 'active', 'closed'])->default('draft');
             $table->boolean('is_featured')->default(false);
             $table->timestamps();
+
+            // PostgreSQL tidak auto-index FK & kolom filter — index eksplisit dibutuhkan untuk performa query
+            $table->index('status');
         });
     }
 

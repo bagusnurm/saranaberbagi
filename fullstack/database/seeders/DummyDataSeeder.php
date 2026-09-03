@@ -12,7 +12,6 @@ use App\Models\JobVacancy;
 use App\Models\PaymentMethod;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class DummyDataSeeder extends Seeder
 {

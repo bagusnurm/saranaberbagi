@@ -22,7 +22,7 @@
                 {{-- Logo putih khusus dipakai di sini karena background gradient
                      teal — logo brand default (teal) kontrasnya rendah. Sesuaikan
                      path kalau lokasi file gambar kamu bukan public/images/. --}}
-                <img src="{{ asset('images/LogoPutih.png') }}" alt="SaranaBerbagi" class="fi-split-auth-logo-img">
+                <img src="{{ asset('images/LogoPutih.webp') }}" alt="SaranaBerbagi" class="fi-split-auth-logo-img" loading="lazy">
             </div>
 
             <div class="fi-split-auth-copy">

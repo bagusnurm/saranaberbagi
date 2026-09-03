@@ -17,8 +17,18 @@ class EditUser extends EditRecord
         ];
     }
 
-     protected function getRedirectUrl(): string
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // Cegah privilege escalation jika non-super_admin mencoba mengubah akun super_admin
+        if (! auth()->user()?->hasRole('super_admin') && $this->getRecord()->hasRole('super_admin')) {
+            abort(403, 'Hanya super_admin yang berhak mengubah akun super_admin.');
+        }
+
+        return $data;
     }
 }

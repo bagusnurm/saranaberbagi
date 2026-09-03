@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $campaign->title . ' - Sarana Berbagi')
+@section('meta_description', Str::limit(strip_tags($campaign->description ?? ''), 160))
+@section('og_image', $campaign->thumbnail ? asset('storage/' . $campaign->thumbnail) : asset('img/logo-sarana-berbagi.png'))
 
 @section('content')
     @php
@@ -37,7 +39,8 @@
                     <div class="relative aspect-video w-full overflow-hidden">
                         <img src="{{ $thumbnailUrl }}"
                             alt="{{ $campaign->title }}"
-                            class="w-full h-full object-cover">
+                            class="w-full h-full object-cover"
+                            loading="lazy">
                     </div>
 
                     {{-- Badges on Banner --}}
@@ -305,7 +308,8 @@
                                 <a href="{{ route('program.show', $other->slug) }}" class="flex items-center gap-3 group">
                                     <img src="{{ $other->thumbnail ? asset('storage/' . $other->thumbnail) : 'https://placehold.co/100x100/0f766e/ffffff?text=SB' }}"
                                         alt="{{ $other->title }}"
-                                        class="w-14 h-14 rounded-xl object-cover shrink-0 border border-outline-variant/30 group-hover:scale-105 transition-transform">
+                                        class="w-14 h-14 rounded-xl object-cover shrink-0 border border-outline-variant/30 group-hover:scale-105 transition-transform"
+                                        loading="lazy">
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">{{ $other->title }}</p>
                                         <p class="text-[11px] text-primary font-bold mt-1">

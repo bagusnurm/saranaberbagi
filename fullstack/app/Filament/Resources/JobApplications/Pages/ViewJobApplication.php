@@ -5,7 +5,6 @@ namespace App\Filament\Resources\JobApplications\Pages;
 use App\Filament\Resources\JobApplications\JobApplicationResource;
 use App\Models\JobApplication;
 use Filament\Actions\Action;
-use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 
@@ -92,22 +91,23 @@ class ViewJobApplication extends ViewRecord
                 ->label('Unduh CV')
                 ->icon('heroicon-o-arrow-down-tray')
                 ->color('gray')
-                ->visible(fn (JobApplication $record): bool => !empty($record->cv_file))
-                ->url(fn (JobApplication $record): string => asset('storage/' . $record->cv_file))
+                ->visible(fn (JobApplication $record): bool => ! empty($record->cv_file))
+                ->url(fn (JobApplication $record): string => asset('storage/'.$record->cv_file))
                 ->openUrlInNewTab(),
 
             Action::make('whatsapp')
                 ->label('Hubungi WhatsApp')
                 ->icon('heroicon-o-chat-bubble-left-ellipsis')
                 ->color('success')
-                ->visible(fn (JobApplication $record): bool => !empty($record->phone))
+                ->visible(fn (JobApplication $record): bool => ! empty($record->phone))
                 ->url(function (JobApplication $record): string {
                     $phone = preg_replace('/[^0-9]/', '', $record->phone);
                     if (str_starts_with($phone, '0')) {
-                        $phone = '62' . substr($phone, 1);
+                        $phone = '62'.substr($phone, 1);
                     }
                     $posisi = $record->vacancy?->title ?? 'posisi yang dilamar';
                     $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim HR Sarana Berbagi mengenai lamaran Anda untuk {$posisi}.");
+
                     return "https://wa.me/{$phone}?text={$msg}";
                 })
                 ->openUrlInNewTab(),
@@ -116,10 +116,11 @@ class ViewJobApplication extends ViewRecord
                 ->label('Kirim Email')
                 ->icon('heroicon-o-envelope')
                 ->color('gray')
-                ->visible(fn (JobApplication $record): bool => !empty($record->email))
+                ->visible(fn (JobApplication $record): bool => ! empty($record->email))
                 ->url(function (JobApplication $record): string {
                     $posisi = $record->vacancy?->title ?? 'Lamaran Kerja';
                     $subject = urlencode("Proses Seleksi ({$posisi}) - Sarana Berbagi");
+
                     return "mailto:{$record->email}?subject={$subject}";
                 })
                 ->openUrlInNewTab(),

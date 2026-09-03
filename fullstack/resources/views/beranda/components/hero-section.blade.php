@@ -13,7 +13,8 @@
         <div class="w-full md:w-1/2">
             <img alt="Relawan Sarana Berbagi"
                 class="w-full h-auto rounded-[24px] shadow-lg object-cover aspect-video"
-                src="{{ asset('img/photo_4_2026-04-10_15-51-29.jpg') }}">
+                src="{{ asset('img/hero-relawan.webp') }}"
+                fetchpriority="high">
         </div>
     </div>
 </section>

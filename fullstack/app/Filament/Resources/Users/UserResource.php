@@ -16,7 +16,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Override;
 use UnitEnum;
 
 class UserResource extends Resource
@@ -38,7 +37,6 @@ class UserResource extends Resource
     protected static ?string $slug = 'pengguna';
 
     protected static ?int $navigationSort = 1;
-
 
     public static function getNavigationBadge(): ?string
     {

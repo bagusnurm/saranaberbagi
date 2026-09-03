@@ -69,23 +69,24 @@ class ViewDonation extends ViewRecord
                 ->label('Lihat Bukti Transfer')
                 ->icon('heroicon-o-photo')
                 ->color('info')
-                ->visible(fn (Donation $record): bool => !empty($record->proof_of_payment))
-                ->url(fn (Donation $record): string => asset('storage/' . $record->proof_of_payment))
+                ->visible(fn (Donation $record): bool => ! empty($record->proof_of_payment))
+                ->url(fn (Donation $record): string => asset('storage/'.$record->proof_of_payment))
                 ->openUrlInNewTab(),
 
             Action::make('whatsapp')
                 ->label('Kirim WA Konfirmasi')
                 ->icon('heroicon-o-chat-bubble-left-ellipsis')
                 ->color('success')
-                ->visible(fn (Donation $record): bool => !empty($record->donor_phone))
+                ->visible(fn (Donation $record): bool => ! empty($record->donor_phone))
                 ->url(function (Donation $record): string {
                     $phone = preg_replace('/[^0-9]/', '', $record->donor_phone);
                     if (str_starts_with($phone, '0')) {
-                        $phone = '62' . substr($phone, 1);
+                        $phone = '62'.substr($phone, 1);
                     }
                     $amount = number_format($record->amount, 0, ',', '.');
                     $campaign = $record->campaign?->title ?? 'Donasi Kebaikan';
                     $msg = urlencode("Halo {$record->donor_name}, terima kasih atas donasi sebesar Rp {$amount} untuk {$campaign}. Semoga membawa keberkahan dan bernilai ibadah jariyah. (Invoice: {$record->invoice_number})");
+
                     return "https://wa.me/{$phone}?text={$msg}";
                 })
                 ->openUrlInNewTab(),

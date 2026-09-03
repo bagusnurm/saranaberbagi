@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontFamily;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\TextSize;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 
 class DonationInfolist
@@ -96,8 +97,9 @@ class DonationInfolist
                             ->icon('heroicon-o-document-arrow-down')
                             ->formatStateUsing(fn (string $state): string => basename($state))
                             ->url(function (string $state): string {
-                                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+                                /** @var FilesystemAdapter $disk */
                                 $disk = Storage::disk('public');
+
                                 return $disk->url($state);
                             })
                             ->openUrlInNewTab(),

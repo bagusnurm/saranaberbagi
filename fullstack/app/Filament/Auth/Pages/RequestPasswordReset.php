@@ -60,13 +60,13 @@ class RequestPasswordReset extends BaseRequestPasswordReset
             ->submit('request');
     }
 
-
     public function request(): void
     {
         try {
             $this->rateLimit(2);
         } catch (TooManyRequestsException $exception) {
             $this->getRateLimitedNotification($exception)?->send();
+
             return;
         }
 
@@ -86,6 +86,7 @@ class RequestPasswordReset extends BaseRequestPasswordReset
 
         if ($status !== Password::RESET_LINK_SENT) {
             Notification::make()->title(__($status))->danger()->send();
+
             return;
         }
 

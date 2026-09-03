@@ -13,11 +13,14 @@ class AidRequest extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'birthdate'   => 'date',
-        'is_mualaf'   => 'boolean',
-        'photos'      => 'array',
-        'videos'      => 'array',
+        'birthdate' => 'date',
+        'is_mualaf' => 'boolean',
+        'photos' => 'array',
+        'videos' => 'array',
         'fund_needed' => 'decimal:2',
+        'nik' => 'encrypted',
+        'kk_number' => 'encrypted',
+        'bank_account_number' => 'encrypted',
     ];
 
     public function campaign(): BelongsTo

@@ -5,13 +5,10 @@ namespace App\Filament\Widgets;
 use App\Filament\Resources\Donations\DonationResource;
 use App\Models\Donation as ModelsDonation;
 use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
-use Donation;
 use Filament\Actions\Action;
-use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
-use Illuminate\Database\Eloquent\Builder;
 
 class PendingDonationsWidget extends TableWidget
 {

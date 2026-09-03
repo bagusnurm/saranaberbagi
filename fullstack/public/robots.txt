@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /berbagi
+Disallow: /admin
+Disallow: /storage/framework
+Allow: /
+
+Sitemap: https://saranaberbagi.org/sitemap.xml

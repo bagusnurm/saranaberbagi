@@ -8,7 +8,6 @@ use App\Filament\Widgets\PendingDonationsWidget;
 use App\Filament\Widgets\PlatformOverview;
 use App\Http\Middleware\RedirectToAuthPanelLogin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
-use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -17,7 +16,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -39,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->authGuard('web')
             ->sidebarWidth('16rem')
             ->sidebarCollapsibleOnDesktop()
-            ->brandLogo(fn() => view('logo-change.logo'))
+            ->brandLogo(fn () => view('logo-change.logo'))
             ->favicon(asset('images/favicon.webp'))
             ->darkMode(false)
             ->colors([
@@ -79,7 +77,7 @@ class AdminPanelProvider extends PanelProvider
                     ->gridColumns([
                         'default' => 1,
                         'sm' => 2,
-                        'lg' => 3
+                        'lg' => 3,
                     ])
                     ->sectionColumnSpan(1)
                     ->checkboxListColumns([

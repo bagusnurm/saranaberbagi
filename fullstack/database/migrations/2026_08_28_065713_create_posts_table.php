@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('content');
-            $table->string('thumbnail')->nullable();
+            // TEXT langsung dari awal — string(255) tidak cukup untuk URL/path panjang
+            $table->text('thumbnail')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamps();

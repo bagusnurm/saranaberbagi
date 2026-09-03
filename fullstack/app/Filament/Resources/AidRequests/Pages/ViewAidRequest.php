@@ -21,7 +21,7 @@ class ViewAidRequest extends ViewRecord
                 ->label('Kembali')
                 ->icon('heroicon-o-arrow-left')
                 ->url(static::getResource()::getUrl('index')),
-                
+
             Action::make('verify')
                 ->label('Verifikasi Permohonan')
                 ->icon('heroicon-o-check-circle')
@@ -100,13 +100,14 @@ class ViewAidRequest extends ViewRecord
                 ->label('Hubungi WhatsApp')
                 ->icon('heroicon-o-chat-bubble-left-ellipsis')
                 ->color('success')
-                ->visible(fn (AidRequest $record): bool => !empty($record->phone))
+                ->visible(fn (AidRequest $record): bool => ! empty($record->phone))
                 ->url(function (AidRequest $record): string {
                     $phone = preg_replace('/[^0-9]/', '', $record->phone);
                     if (str_starts_with($phone, '0')) {
-                        $phone = '62' . substr($phone, 1);
+                        $phone = '62'.substr($phone, 1);
                     }
                     $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim Sarana Berbagi mengenai permohonan bantuan ({$record->aid_type}) yang Anda ajukan.");
+
                     return "https://wa.me/{$phone}?text={$msg}";
                 })
                 ->openUrlInNewTab(),

@@ -1,40 +1,35 @@
-<nav
-    class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md dark:bg-on-background/95 border-b border-outline-variant/30 shadow-sm dark:shadow-none transition-all duration-300">
+@php
+    $navLinks = [
+        ['url' => '/', 'label' => 'Tentang Kami', 'pattern' => '/'],
+        ['url' => '/program', 'label' => 'Program', 'pattern' => 'program*'],
+        ['url' => '/kabar', 'label' => 'Kabar', 'pattern' => 'kabar*'],
+        ['url' => '/berita', 'label' => 'Berita', 'pattern' => 'berita*'],
+        ['url' => '/karir', 'label' => 'Karir', 'pattern' => 'karir*'],
+        ['url' => '/kolaborasi', 'label' => 'Kolaborasi', 'pattern' => 'kolaborasi*'],
+    ];
+@endphp
+
+<nav class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300">
     <div class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-20">
         {{-- Logo --}}
         <div class="flex items-center gap-4">
             <a class="flex items-center" href="{{ url('/') }}">
                 <img alt="Sarana Berbagi Logo" class="h-28 w-auto object-contain"
-                    src="{{ asset('img/PROPERTY (2).png') }}">
+                    src="{{ asset('img/logo-sarana-berbagi.png') }}">
             </a>
         </div>
 
         {{-- Desktop Navigation Links --}}
         <div class="hidden lg:flex items-center gap-6">
-            <a class="{{ Request::is('/') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/') }}">
-                Tentang Kami
-            </a>
-            <a class="{{ Request::is('program*') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/program') }}">
-                Program
-            </a>
-            <a class="{{ Request::is('kabar*') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/kabar') }}">
-                Kabar
-            </a>
-            <a class="{{ Request::is('berita*') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/berita') }}">
-                Berita
-            </a>
-            <a class="{{ Request::is('karir*') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/karir') }}">
-                Karir
-            </a>
-            <a class="{{ Request::is('kolaborasi*') ? 'text-primary dark:text-primary-fixed font-semibold border-b-2 border-primary dark:border-primary-fixed pb-1' : 'text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed' }} transition-colors hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
-                href="{{ url('/kolaborasi') }}">
-                Kolaborasi
-            </a>
+            @foreach ($navLinks as $item)
+                @php
+                    $isActive = ($item['pattern'] === '/') ? Request::is('/') : Request::is($item['pattern']);
+                @endphp
+                <a class="{{ $isActive ? 'text-primary font-semibold border-b-2 border-primary pb-1' : 'text-on-surface-variant hover:text-primary' }} transition-colors hover:bg-surface-container-low rounded-lg px-3 py-2 active:scale-95 duration-200 font-body-md text-body-md"
+                    href="{{ url($item['url']) }}">
+                    {{ $item['label'] }}
+                </a>
+            @endforeach
         </div>
 
         {{-- Action Buttons: Login / Dashboard & Donasi --}}
@@ -42,7 +37,7 @@
             @guest
                 {{-- Tombol Masuk / Login --}}
                 <a href="{{ url('/auth/login') }}"
-                    class="inline-flex items-center gap-1.5 text-primary border border-primary/40 hover:bg-primary hover:text-white dark:text-primary-fixed dark:border-primary-fixed/40 dark:hover:bg-primary-fixed dark:hover:text-on-primary-fixed font-label-sm text-label-sm px-4 py-2.5 rounded-lg transition-all active:scale-95 font-semibold">
+                    class="inline-flex items-center gap-1.5 text-primary border border-primary/40 hover:bg-primary hover:text-white font-label-sm text-label-sm px-4 py-2.5 rounded-lg transition-all active:scale-95 font-semibold">
                     <span class="material-symbols-outlined text-[18px]">login</span>
                     <span>Masuk</span>
                 </a>
@@ -50,6 +45,7 @@
                 {{-- Dropdown / Dashboard Info --}}
                 <div class="relative" id="userMenuContainer">
                     <button type="button" id="userMenuBtn"
+                        aria-haspopup="true" aria-expanded="false" aria-controls="userDropdown"
                         class="flex items-center gap-2 bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 px-3 py-2 rounded-lg text-left transition-colors">
                         <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs uppercase">
                             {{ mb_substr(auth()->user()->name, 0, 1) }}
@@ -91,13 +87,14 @@
             @endguest
 
             {{-- Tombol Donasi --}}
-            <a class="bg-[#F59E0B] text-white font-label-sm text-label-sm px-5 py-2.5 rounded-lg hover:bg-[#D97706] transition-colors shadow-sm active:scale-95 font-semibold shrink-0"
+            <a class="bg-accent text-on-accent font-label-sm text-label-sm px-5 py-2.5 rounded-lg hover:bg-accent-hover transition-colors shadow-sm active:scale-95 font-semibold shrink-0"
                 href="{{ url('/donasi') }}">
                 Donasi
             </a>
 
             {{-- Mobile hamburger button --}}
             <button type="button" id="mobile-menu-btn"
+                aria-haspopup="true" aria-expanded="false" aria-controls="mobile-menu"
                 class="lg:hidden text-on-surface-variant hover:text-primary p-2 focus:outline-none"
                 aria-label="Toggle menu">
                 <span class="material-symbols-outlined text-2xl">menu</span>
@@ -107,18 +104,15 @@
 
     {{-- Mobile Menu Dropdown --}}
     <div id="mobile-menu" class="hidden lg:hidden bg-surface border-t border-outline-variant/30 px-6 py-4 space-y-3">
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('/') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/') }}">Tentang Kami</a>
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('program*') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/program') }}">Program</a>
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('kabar*') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/kabar') }}">Kabar</a>
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('berita*') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/berita') }}">Berita</a>
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('karir*') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/karir') }}">Karir</a>
-        <a class="block py-2 text-on-surface-variant hover:text-primary {{ Request::is('kolaborasi*') ? 'font-bold text-primary' : '' }}"
-            href="{{ url('/kolaborasi') }}">Kolaborasi</a>
+        @foreach ($navLinks as $item)
+            @php
+                $isActive = ($item['pattern'] === '/') ? Request::is('/') : Request::is($item['pattern']);
+            @endphp
+            <a class="block py-2 text-on-surface-variant hover:text-primary {{ $isActive ? 'font-bold text-primary' : '' }}"
+                href="{{ url($item['url']) }}">
+                {{ $item['label'] }}
+            </a>
+        @endforeach
 
         <div class="pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
             @guest
@@ -161,11 +155,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        if (btn && menu) {
-            btn.addEventListener('click', function() {
-                menu.classList.toggle('hidden');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', function() {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                mobileBtn.setAttribute('aria-expanded', (!isHidden).toString());
             });
         }
 
@@ -174,12 +169,14 @@
         if (userBtn && userDropdown) {
             userBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                userDropdown.classList.toggle('hidden');
+                const isHidden = userDropdown.classList.toggle('hidden');
+                userBtn.setAttribute('aria-expanded', (!isHidden).toString());
             });
 
             document.addEventListener('click', function(e) {
                 if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
                     userDropdown.classList.add('hidden');
+                    userBtn.setAttribute('aria-expanded', 'false');
                 }
             });
         }

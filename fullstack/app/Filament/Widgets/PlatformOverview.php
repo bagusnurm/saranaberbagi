@@ -11,7 +11,8 @@ use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class PlatformOverview extends StatsOverviewWidget
-{use HasWidgetShield;
+{
+    use HasWidgetShield;
 
     protected static ?int $sort = 3;
 

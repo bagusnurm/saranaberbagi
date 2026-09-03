@@ -124,7 +124,7 @@ class Login extends BaseLogin
     {
         Notification::make()
             ->title('Login Berhasil')
-            ->body('Selamat datang kembali, ' . Filament::auth()->user()->name . '!')
+            ->body('Selamat datang kembali, '.Filament::auth()->user()->name.'!')
             ->success()
             ->duration(4000)
             ->send();

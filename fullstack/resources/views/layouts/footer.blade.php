@@ -13,7 +13,8 @@
             </div>
             <div class="flex items-center gap-3">
                 <img alt="Sarana Berbagi Logo" class="h-28 w-auto object-contain"
-                    src="{{ asset('img/PROPERTY (2).png') }}" />
+                    src="{{ asset('img/logo-sarana-berbagi.png') }}"
+                    loading="lazy" />
                 <span class="font-h2 text-xl font-bold tracking-tight uppercase leading-tight">SARANA<br>BERBAGI</span>
             </div>
         </div>
@@ -74,7 +75,8 @@
                 <div class="w-full h-32 bg-gray-200 rounded overflow-hidden mt-2 relative">
                     <img alt="Map Location"
                         class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwbSQ6aKCbEBC-2X0avJDgu_xHWPfpejdw63Vq29Ju1OnI9kQ7sdNeVM0QhAWMPZxAI7Q9c85Bibj3m43pJGdiHRLeh8zOwx0eCI9OEWvAngbnFxy13LUrWGztCteJaNjS-kMLtQcoVeQqMBHecOSdYd9uHJoh18xyFL6l-kj9-SRRjOVH5p4O_k62Oq8Jy2Dyt5tCFQx4xN5F-UlRTRV2ZO-BS-wafarPP5HzQ6lgfI3iQg0UmZoVrw">
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwbSQ6aKCbEBC-2X0avJDgu_xHWPfpejdw63Vq29Ju1OnI9kQ7sdNeVM0QhAWMPZxAI7Q9c85Bibj3m43pJGdiHRLeh8zOwx0eCI9OEWvAngbnFxy13LUrWGztCteJaNjS-kMLtQcoVeQqMBHecOSdYd9uHJoh18xyFL6l-kj9-SRRjOVH5p4O_k62Oq8Jy2Dyt5tCFQx4xN5F-UlRTRV2ZO-BS-wafarPP5HzQ6lgfI3iQg0UmZoVrw"
+                        loading="lazy">
                     <a href="https://maps.google.com/?q=Komplek+Griya+Bandung+Indah+Blok+F+19+No+10+Bojongsoang+Bandung" 
                        target="_blank" rel="noopener noreferrer" 
                        class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 text-white text-xs font-semibold uppercase tracking-wider transition-colors">

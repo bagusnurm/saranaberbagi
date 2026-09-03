@@ -16,9 +16,15 @@ class CampaignOverview extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $activeCampaigns = Campaign::query()->where('status', 'active');
-        $totalTarget = (float) $activeCampaigns->sum('target_amount');
-        $totalCollected = (float) $activeCampaigns->sum('collected_amount');
+        // Single query instead of 3 separate sum/count calls
+        $stats = Campaign::query()
+            ->where('status', 'active')
+            ->selectRaw('COUNT(*) as total_count, COALESCE(SUM(target_amount), 0) as total_target, COALESCE(SUM(collected_amount), 0) as total_collected')
+            ->first();
+
+        $totalActive = (int) $stats->total_count;
+        $totalTarget = (float) $stats->total_target;
+        $totalCollected = (float) $stats->total_collected;
         $progress = $totalTarget > 0 ? round($totalCollected / $totalTarget * 100) : 0;
 
         $pendingDonations = Donation::query()->where('status', 'pending')->count();
@@ -30,13 +36,13 @@ class CampaignOverview extends StatsOverviewWidget
             ->sum('amount');
 
         return [
-            Stat::make('Program Aktif', $activeCampaigns->count())
+            Stat::make('Program Aktif', $totalActive)
                 ->description('Total program donasi yang sedang berjalan')
                 ->descriptionIcon('heroicon-m-heart')
                 ->color('info'),
 
-            Stat::make('Dana Terkumpul (Aktif)', 'Rp ' . number_format($totalCollected, 0, ',', '.'))
-                ->description("{$progress}% dari target Rp " . number_format($totalTarget, 0, ',', '.'))
+            Stat::make('Dana Terkumpul (Aktif)', 'Rp '.number_format($totalCollected, 0, ',', '.'))
+                ->description("{$progress}% dari target Rp ".number_format($totalTarget, 0, ',', '.'))
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('success'),
 
@@ -45,7 +51,7 @@ class CampaignOverview extends StatsOverviewWidget
                 ->descriptionIcon('heroicon-m-clock')
                 ->color($pendingDonations > 0 ? 'warning' : 'success'),
 
-            Stat::make('Terverifikasi Bulan Ini', 'Rp ' . number_format($verifiedThisMonth, 0, ',', '.'))
+            Stat::make('Terverifikasi Bulan Ini', 'Rp '.number_format($verifiedThisMonth, 0, ',', '.'))
                 ->description(now()->translatedFormat('F Y'))
                 ->descriptionIcon('heroicon-m-check-badge')
                 ->color('primary'),

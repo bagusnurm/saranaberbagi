@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('campaign_comments')) {
+        if (! Schema::hasTable('campaign_comments')) {
             Schema::create('campaign_comments', function (Blueprint $table) {
                 $table->id();
                 $table->string('program_slug', 191)->index();

@@ -1,6 +1,6 @@
 <div class="filament-logo-center">
     <div class="flex items-center gap-3" style="height: 2rem;">
-        <img src="{{ asset('images/brandlogo-teal (1).png') }}" alt="Logo Sarana Berbagi" style="height: 2rem; width: auto;">
+        <img src="{{ asset('images/brandlogo-teal (1).png') }}" alt="Logo Sarana Berbagi" style="height: 2rem; width: auto;" loading="lazy">
     </div>
 </div>
 

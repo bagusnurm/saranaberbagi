@@ -18,7 +18,7 @@ class DonationForm
                 TextInput::make('invoice_number')
                     ->label('Nomor Invoice')
                     ->required()
-                    ->default(fn () => 'INV-' . date('YmdHis') . '-' . rand(100, 999))
+                    ->default(fn () => 'INV-'.date('YmdHis').'-'.rand(100, 999))
                     ->unique(ignoreRecord: true),
                 Select::make('campaign_id')
                     ->label('Program Donasi')

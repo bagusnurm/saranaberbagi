@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $post->title . ' - Kabar Sarana Berbagi')
+@section('meta_description', Str::limit(strip_tags($post->content ?? ''), 160))
+@section('og_image', $post->thumbnail ? (str_starts_with($post->thumbnail, 'http') ? $post->thumbnail : asset('storage/' . $post->thumbnail)) : asset('img/logo-sarana-berbagi.png'))
 
 @section('content')
     @php
@@ -60,7 +62,8 @@
                     <div class="aspect-video w-full overflow-hidden">
                         <img src="{{ $thumbnailUrl }}"
                             alt="{{ $post->title }}"
-                            class="w-full h-full object-cover">
+                            class="w-full h-full object-cover"
+                            loading="lazy">
                     </div>
                 </div>
 
@@ -123,7 +126,8 @@
                                 <a href="{{ route('kabar.show', $other->slug) }}" class="flex items-center gap-3.5 group">
                                     <img src="{{ $otherThumb }}"
                                         alt="{{ $other->title }}"
-                                        class="w-16 h-16 rounded-2xl object-cover shrink-0 border border-outline-variant/30 group-hover:scale-105 transition-transform">
+                                        class="w-16 h-16 rounded-2xl object-cover shrink-0 border border-outline-variant/30 group-hover:scale-105 transition-transform"
+                                        loading="lazy">
                                     <div class="flex-1 min-w-0">
                                         <span class="text-[10px] font-bold uppercase tracking-wider text-primary">{{ $other->category?->name ?? 'Artikel' }}</span>
                                         <p class="text-xs font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2 leading-snug mt-0.5">

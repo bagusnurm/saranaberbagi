@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\KonfirmasiDonasi;
 use App\Models\Campaign;
 use App\Models\Donation;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\KonfirmasiDonasi;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class DonasiController extends Controller
@@ -51,7 +51,7 @@ class DonasiController extends Controller
 
         $data['is_anonymous'] = $request->boolean('is_anonymous');
 
-        $campaign = !empty($data['campaign_id']) ? Campaign::find($data['campaign_id']) : null;
+        $campaign = ! empty($data['campaign_id']) ? Campaign::find($data['campaign_id']) : null;
         $paymentMethods = PaymentMethod::where('is_active', true)->get();
 
         return view('donasi.step2', compact('data', 'campaign', 'paymentMethods'));
@@ -75,7 +75,7 @@ class DonasiController extends Controller
 
         $data['is_anonymous'] = $request->boolean('is_anonymous');
 
-        $campaign = !empty($data['campaign_id']) ? Campaign::find($data['campaign_id']) : null;
+        $campaign = ! empty($data['campaign_id']) ? Campaign::find($data['campaign_id']) : null;
         $paymentMethod = PaymentMethod::findOrFail($data['payment_method_id']);
 
         return view('donasi.step3', compact('data', 'campaign', 'paymentMethod'));
@@ -101,21 +101,21 @@ class DonasiController extends Controller
 
         // Buat nomor invoice unik
         do {
-            $invoiceNumber = 'INV-' . date('Ymd') . '-' . strtoupper(Str::random(4));
+            $invoiceNumber = 'INV-'.date('Ymd').'-'.strtoupper(Str::random(4));
         } while (Donation::where('invoice_number', $invoiceNumber)->exists());
 
         // Simpan donasi ke database
         $donation = Donation::create([
             'invoice_number' => $invoiceNumber,
             'user_id' => auth()->id(),
-            'campaign_id' => !empty($data['campaign_id']) ? $data['campaign_id'] : null,
+            'campaign_id' => ! empty($data['campaign_id']) ? $data['campaign_id'] : null,
             'payment_method_id' => $data['payment_method_id'],
             'donor_name' => trim($data['nama']),
             'donor_email' => trim($data['email']),
             'donor_phone' => trim($data['telepon']),
             'is_anonymous' => $isAnonymous,
             'amount' => $data['nominal'],
-            'message' => !empty($data['pesan']) ? trim($data['pesan']) : null,
+            'message' => ! empty($data['pesan']) ? trim($data['pesan']) : null,
             'status' => 'pending',
         ]);
 
@@ -135,7 +135,7 @@ class DonasiController extends Controller
                 'campaign' => $campaign?->title ?? 'Donasi Umum',
             ]));
         } catch (\Exception $e) {
-            Log::error('Email konfirmasi donasi gagal dikirim: ' . $e->getMessage());
+            Log::error('Email konfirmasi donasi gagal dikirim: '.$e->getMessage());
         }
 
         return view('donasi.konfirmasi', compact('donation', 'campaign', 'paymentMethod'));

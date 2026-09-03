@@ -21,7 +21,7 @@ class ProgramCommentController extends Controller
 
         $campaign = Campaign::where('slug', $validated['program'])->first();
 
-        if (!$campaign) {
+        if (! $campaign) {
             return response()->json([
                 'program' => $validated['program'],
                 'total' => 0,
@@ -68,7 +68,7 @@ class ProgramCommentController extends Controller
 
         $campaign = Campaign::where('slug', $validated['program'])->first();
 
-        if (!$campaign) {
+        if (! $campaign) {
             return response()->json([
                 'message' => 'Program tidak ditemukan.',
             ], 422);

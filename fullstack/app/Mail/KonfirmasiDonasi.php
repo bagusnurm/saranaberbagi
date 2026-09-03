@@ -22,7 +22,7 @@ class KonfirmasiDonasi extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Konfirmasi Donasi - ' . $this->data['nama'],
+            subject: 'Konfirmasi Donasi - '.$this->data['nama'],
         );
     }
 
