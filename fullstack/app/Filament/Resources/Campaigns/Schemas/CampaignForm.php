@@ -38,7 +38,8 @@ class CampaignForm
                     ->image()
                     ->disk('public')
                     ->directory('campaigns/thumbnails')
-                    ->imageEditor(),
+                    ->imageEditor()
+                    ->maxSize(5120),
                 TextInput::make('target_amount')
                     ->label('Target Dana Terkumpul')
                     ->required()
@@ -47,15 +48,18 @@ class CampaignForm
                     ->default(0),
                 TextInput::make('collected_amount')
                     ->label('Dana Terkumpul Saat Ini')
-                    ->required()
                     ->numeric()
                     ->prefix('Rp')
-                    ->default(0),
+                    ->default(0)
+                    ->disabled()
+                    ->dehydrated(false)
+                    ->helperText('Diperbarui secara otomatis saat transaksi donasi diverifikasi.'),
                 DatePicker::make('start_date')
                     ->label('Tanggal Mulai')
                     ->native(false),
                 DatePicker::make('end_date')
                     ->label('Tanggal Berakhir')
+                    ->afterOrEqual('start_date')
                     ->native(false),
                 Select::make('status')
                     ->label('Status Program')

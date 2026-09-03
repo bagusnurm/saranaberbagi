@@ -38,7 +38,8 @@ class JobVacancyForm
                     ->label('Lokasi / Penempatan')
                     ->placeholder('Misal: Jakarta / Remote / Lapangan'),
                 DatePicker::make('deadline')
-                    ->label('Batas Akhir Pendaftaran'),
+                    ->label('Batas Akhir Pendaftaran')
+                    ->afterOrEqual('today'),
                 Select::make('status')
                     ->label('Status Lowongan')
                     ->options([

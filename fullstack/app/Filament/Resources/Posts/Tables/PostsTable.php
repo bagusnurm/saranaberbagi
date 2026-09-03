@@ -15,6 +15,7 @@ class PostsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['category', 'author']))
             ->columns([
                 ImageColumn::make('thumbnail')
                     ->label('Sampul')

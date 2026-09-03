@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CollaborationRequests\Tables;
 
 use App\Models\CollaborationRequest;
+use App\Support\PhoneNumber;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -152,10 +153,7 @@ class CollaborationRequestsTable
                         ->color('success')
                         ->visible(fn (CollaborationRequest $record): bool => ! empty($record->phone))
                         ->url(function (CollaborationRequest $record): string {
-                            $phone = preg_replace('/[^0-9]/', '', $record->phone);
-                            if (str_starts_with($phone, '0')) {
-                                $phone = '62'.substr($phone, 1);
-                            }
+                            $phone = PhoneNumber::toWhatsappFormat($record->phone);
                             $msg = urlencode("Halo Tim {$record->institution_name}, kami dari Tim Kemitraan Sarana Berbagi mengenai proposal kolaborasi ({$record->collaboration_type}) yang diajukan.");
 
                             return "https://wa.me/{$phone}?text={$msg}";

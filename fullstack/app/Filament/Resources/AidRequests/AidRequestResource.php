@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\AidRequests;
 
-use App\Filament\Resources\AidRequests\Pages\EditAidRequest;
 use App\Filament\Resources\AidRequests\Pages\ListAidRequests;
 use App\Filament\Resources\AidRequests\Pages\ViewAidRequest;
 use App\Filament\Resources\AidRequests\Schemas\AidRequestInfolist;
@@ -63,7 +62,6 @@ class AidRequestResource extends Resource
         return [
             'index' => ListAidRequests::route('/'),
             'view' => ViewAidRequest::route('/{record}'),
-            'edit' => EditAidRequest::route('/{record}/edit'),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\JobApplications\Tables;
 
 use App\Models\JobApplication;
+use App\Support\PhoneNumber;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -19,6 +20,7 @@ class JobApplicationsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['vacancy']))
             ->columns([
                 TextColumn::make('applicant_name')
                     ->label('Nama Pelamar')
@@ -159,10 +161,7 @@ class JobApplicationsTable
                         ->color('success')
                         ->visible(fn (JobApplication $record): bool => ! empty($record->phone))
                         ->url(function (JobApplication $record): string {
-                            $phone = preg_replace('/[^0-9]/', '', $record->phone);
-                            if (str_starts_with($phone, '0')) {
-                                $phone = '62'.substr($phone, 1);
-                            }
+                            $phone = PhoneNumber::toWhatsappFormat($record->phone);
                             $posisi = $record->vacancy?->title ?? 'posisi yang dilamar';
                             $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim HR Sarana Berbagi mengenai lamaran Anda untuk {$posisi}.");
 

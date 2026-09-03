@@ -3,11 +3,11 @@
 namespace App\Filament\Resources\AidRequests\Tables;
 
 use App\Models\AidRequest;
+use App\Support\PhoneNumber;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
@@ -20,6 +20,7 @@ class AidRequestsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['campaign']))
             ->columns([
                 TextColumn::make('applicant_name')
                     ->label('Nama Pemohon')
@@ -156,10 +157,7 @@ class AidRequestsTable
                         ->color('success')
                         ->visible(fn (AidRequest $record): bool => ! empty($record->phone))
                         ->url(function (AidRequest $record): string {
-                            $phone = preg_replace('/[^0-9]/', '', $record->phone);
-                            if (str_starts_with($phone, '0')) {
-                                $phone = '62'.substr($phone, 1);
-                            }
+                            $phone = PhoneNumber::toWhatsappFormat($record->phone);
                             $program = $record->campaign?->title ?? 'bantuan yang diajukan';
                             $msg = urlencode("Halo {$record->applicant_name}, kami dari Tim Sarana Berbagi mengenai permohonan {$program} yang Anda ajukan.");
 
@@ -168,7 +166,6 @@ class AidRequestsTable
                         ->openUrlInNewTab(),
 
                     ViewAction::make(),
-                    EditAction::make(),
                 ]),
             ])
             ->toolbarActions([

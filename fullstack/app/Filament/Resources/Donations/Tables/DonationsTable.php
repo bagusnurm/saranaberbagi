@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Donations\Tables;
 
 use App\Models\Campaign;
 use App\Models\Donation;
+use App\Support\PhoneNumber;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -22,6 +23,7 @@ class DonationsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['campaign', 'paymentMethod']))
             ->columns([
                 TextColumn::make('invoice_number')
                     ->label('No. Invoice')
@@ -169,10 +171,7 @@ class DonationsTable
                         ->color('success')
                         ->visible(fn (Donation $record): bool => ! empty($record->donor_phone))
                         ->url(function (Donation $record): string {
-                            $phone = preg_replace('/[^0-9]/', '', $record->donor_phone);
-                            if (str_starts_with($phone, '0')) {
-                                $phone = '62'.substr($phone, 1);
-                            }
+                            $phone = PhoneNumber::toWhatsappFormat($record->donor_phone);
                             $amount = number_format($record->amount, 0, ',', '.');
                             $campaign = $record->campaign?->title ?? 'Donasi Kebaikan';
                             $msg = urlencode("Halo {$record->donor_name}, terima kasih atas donasi sebesar Rp {$amount} untuk {$campaign}. Semoga membawa keberkahan dan bernilai ibadah jariyah. (Invoice: {$record->invoice_number})");

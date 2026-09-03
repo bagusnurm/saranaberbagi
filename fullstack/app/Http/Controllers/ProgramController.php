@@ -43,13 +43,14 @@ class ProgramController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Rekomendasi program lainnya
-        $otherCampaigns = Campaign::with('category')
-            ->where('id', '!=', $campaign->id)
+        // Rekomendasi program lainnya (mengacak ID di memori untuk menghindari ORDER BY RANDOM() pada database)
+        $otherIds = Campaign::where('id', '!=', $campaign->id)
             ->where('status', 'active')
-            ->inRandomOrder()
-            ->limit(3)
-            ->get();
+            ->pluck('id');
+
+        $otherCampaigns = $otherIds->isNotEmpty()
+            ? Campaign::with('category')->whereIn('id', $otherIds->random(min(3, $otherIds->count())))->get()
+            : collect();
 
         return view('program.show', compact('campaign', 'otherCampaigns'));
     }

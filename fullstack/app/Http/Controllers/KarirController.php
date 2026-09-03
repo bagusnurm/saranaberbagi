@@ -48,11 +48,14 @@ class KarirController extends Controller
             ->where('status', 'open')
             ->firstOrFail();
 
-        $otherVacancies = JobVacancy::where('id', '!=', $vacancy->id)
+        // Rekomendasi lowongan lainnya (mengacak ID di memori untuk menghindari ORDER BY RANDOM() pada database)
+        $otherIds = JobVacancy::where('id', '!=', $vacancy->id)
             ->where('status', 'open')
-            ->inRandomOrder()
-            ->limit(3)
-            ->get();
+            ->pluck('id');
+
+        $otherVacancies = $otherIds->isNotEmpty()
+            ? JobVacancy::whereIn('id', $otherIds->random(min(3, $otherIds->count())))->get()
+            : collect();
 
         return view('karir.show', compact('vacancy', 'otherVacancies'));
     }

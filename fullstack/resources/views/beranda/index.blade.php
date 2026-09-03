@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - Sarana Berbagi')
+@section('title', 'Beranda - Sarana Berbagi')
 
 @section('content')
     {{-- Hero Section --}}
